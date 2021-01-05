@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosWithAuth = () => {
-  return axiosWithAuth.create({
+  return axios.create({
     baseURL: "",
   });
 };
