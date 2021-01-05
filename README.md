@@ -8,4 +8,4 @@
 
 ### Links:
 
-- Marketing pages: https://marketing-pages-home-4hbihv4la.vercel.app/
+- Marketing pages: https://marketing-pages-home.vercel.app/
