@@ -1,7 +1,7 @@
 import React from "react";
 
-const CreateProject = () => {
+const CreateProjectForm = () => {
   return <div></div>;
 };
 
-export default CreateProject;
+export default CreateProjectForm;
