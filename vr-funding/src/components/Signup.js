@@ -1,10 +1,64 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+// setting initial form values that will change dynamically every time the user changes the inputs
+const initialFormValues = {
+  first_name: '',
+  last_name: '',
+  email: '',
+  password: '',
+  role: '',
+};
+
+// organizing data set to be POSTED to API - dynamic values will be added here once form is submitted
+const initialUsers = {
+  users: [
+    {
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: '',
+      role: '',
+      id: Math.round(Math.random() * 1000),
+    },
+  ],
+};
 
 const Signup = () => {
+  const [userList, setUserList] = useState(initialUsers);
+  const [formValues, setFormValues] = useState(initialFormValues);
+
+  const handleChange = (e) => {
+    setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newUser = {
+      first_name: formValues.first_name,
+      last_name: formValues.last_name,
+      email: formValues.email,
+      password: formValues.password,
+      role: formValues.role,
+      id: Math.round(Math.random * 1000),
+    };
+    setUserList({
+      ...userList,
+      users: [...userList.users, newUser],
+    });
+    setFormValues(initialFormValues);
+  };
+  console.log('Current User Input - Type to see changes...', formValues);
+
   return (
     <div>
+      {/* Deployment Version */}
       {/* Note: I will be using inline CSS temporarily to avoid merge conflicts until we can combine it on one stylesheet */}
+
       <form
+        onSubmit={handleSubmit}
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -43,12 +97,24 @@ const Signup = () => {
           </p>
 
           {/*Radio Button 1: Fundraiser*/}
-          <input type='radio' id='fundraiser' name='role' value='1' />
-          <label for='fundraiser'>Fundraiser</label>
+          <input
+            onChange={handleChange}
+            type='radio'
+            id='fundraiser'
+            name='role'
+            value='1'
+          />
+          <label htmlFor='fundraiser'>Fundraiser</label>
 
           {/*Radio Button 2: Funder*/}
-          <input type='radio' id='funder' name='role' value='2' />
-          <label for='funder'>Funder</label>
+          <input
+            onChange={handleChange}
+            type='radio'
+            id='funder'
+            name='role'
+            value='2'
+          />
+          <label htmlFor='funder'>Funder</label>
         </section>
 
         {/*Text Input Forms Based on API EndPoints: First Name, Last Name, Email, Password*/}
@@ -85,6 +151,7 @@ const Signup = () => {
               name='first_name'
               type='text'
               placeholder='First Name'
+              onChange={handleChange}
             ></input>
 
             {/*Last Name Field*/}
@@ -98,6 +165,7 @@ const Signup = () => {
               id='last_name'
               type='text'
               placeholder='Last Name'
+              onChange={handleChange}
             ></input>
           </div>
         </div>
@@ -130,6 +198,7 @@ const Signup = () => {
             name='email'
             id='email'
             type='email'
+            onChange={handleChange}
           ></input>
         </div>
 
@@ -161,6 +230,7 @@ const Signup = () => {
             name='password'
             id='password'
             type='password'
+            onChange={handleChange}
           ></input>
         </div>
 
