@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import NavigationBar from "./components/NavigationBar";
 import Signup from "./components/Signup";
@@ -30,8 +30,14 @@ function App() {
         <div></div>
       </div>
 
+    <Switch>
+    <Route path="/Dashboard_Fundrasier">
       <DashPageA/>
+    </Route>
+    <Route path="/Dashboard_Funder">
       <DashPageB/>
+    </Route>
+  </Switch>
 
       <Route path="/projects" component={ProjectPage} />
       <Route path="/login" component={Login} />
