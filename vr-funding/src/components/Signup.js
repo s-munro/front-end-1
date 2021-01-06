@@ -54,7 +54,6 @@ const Signup = () => {
 
   return (
     <div>
-      {/* Deployment Version */}
       {/* Note: I will be using inline CSS temporarily to avoid merge conflicts until we can combine it on one stylesheet */}
 
       <form
