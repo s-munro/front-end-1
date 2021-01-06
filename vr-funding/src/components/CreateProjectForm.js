@@ -20,7 +20,7 @@ export default function WorkerForm(props) {
                 type="text"
                 name="Project Title"
                 onChange={onChange}
-                value={values.ProjectTitle}
+                value={values.project_title}
                 placeholder="Project Title"
                 maxLength="20"
                 ></input>
@@ -31,7 +31,7 @@ export default function WorkerForm(props) {
                 type='text'
                 name='Project Type'
                 onChange={onChange}
-                value={values.ProjectType}
+                value={values.project_type}
                 placeholder='Project Type'
                 maxLength="20"
                 ></input>
@@ -42,7 +42,7 @@ export default function WorkerForm(props) {
                 type="text"
                 name="Mission Statement"
                 onChange={onChange}
-                value={values.MissionStatement}
+                value={values.mission_statement}
                 placeholder="Mission Statement"
                 maxLength="100"
                 ></input>
@@ -53,7 +53,7 @@ export default function WorkerForm(props) {
                 type="text"
                 name="Project Description"
                 onChange={onChange}
-                value={values.ProjectDescription}
+                value={values.project_description}
                 placeholder="Project Description"
                 maxLength="100"
                 ></input>
@@ -64,7 +64,7 @@ export default function WorkerForm(props) {
                 type="text"
                 name="Funding Amount"
                 onChange={onChange}
-                value={values.FundingAmount}
+                value={values.funding_amount}
                 placeholder="Funding Amount"
                 maxLength="20"
                 ></input>
@@ -75,7 +75,7 @@ export default function WorkerForm(props) {
                 type="text"
                 name="Amount Raised"
                 onChange={onChange}
-                value={values.AmountRaised}
+                value={values.amount_raised}
                 placeholder="Amount Raised"
                 maxLength="20"
                 ></input>
@@ -84,9 +84,9 @@ export default function WorkerForm(props) {
                 Project Timeline
                 <input
                 type="text"
-                name="Roject Timeline"
+                name="Project Timeline"
                 onChange={onChange}
-                value={values.ProjectTimeline}
+                value={values.project_timeline}
                 placeholder="ProjectTimeline"
                 maxLength="20"
                 ></input>
