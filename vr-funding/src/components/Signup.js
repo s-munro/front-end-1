@@ -3,7 +3,7 @@ import React from 'react';
 const Signup = () => {
   return (
     <div>
-      {/* Note:  The inline CSS below is temporary until we all agree on a style guide - will likely be deleted later*/}
+      {/* Note: I will be using inline CSS temporarily to avoid merge conflicts until we can combine it on one stylesheet */}
       <form
         style={{
           display: 'flex',
@@ -51,53 +51,50 @@ const Signup = () => {
           <label for='funder'>Funder</label>
         </section>
         {/*Text Input Forms Based on API EndPoints: First Name, Last Name, Email, Password*/}
-        <section
+
+        <div
           style={{
+            display: 'flex',
+            width: '70%',
+            margin: '2% auto',
+            justifyContent: 'space-between',
             color: 'black',
             fontSize: '1.4rem',
           }}
         >
+          <label>Name</label>
           <div
             style={{
               display: 'flex',
-              width: '70%',
-              margin: '2% auto',
+              width: '80%',
               justifyContent: 'space-between',
             }}
           >
-            <label>Name</label>
-            <div
+            <input
               style={{
-                display: 'flex',
-                width: '80%',
-                justifyContent: 'space-between',
+                height: '30px',
+                width: '45%',
+                fontSize: '1rem',
               }}
-            >
-              <input
-                style={{
-                  height: '30px',
-                  width: '45%',
-                  fontSize: '1rem',
-                }}
-                id='first_name'
-                name='first_name'
-                type='text'
-                placeholder='First Name'
-              ></input>
-              <input
-                style={{
-                  height: '30px',
-                  width: '45%',
-                  fontSize: '1rem',
-                }}
-                name='last_name'
-                id='last_name'
-                type='text'
-                placeholder='Last Name'
-              ></input>
-            </div>
+              id='first_name'
+              name='first_name'
+              type='text'
+              placeholder='First Name'
+            ></input>
+            <input
+              style={{
+                height: '30px',
+                width: '45%',
+                fontSize: '1rem',
+              }}
+              name='last_name'
+              id='last_name'
+              type='text'
+              placeholder='Last Name'
+            ></input>
           </div>
-        </section>
+        </div>
+
         <div
           style={{
             height: '25px',
