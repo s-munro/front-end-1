@@ -1,23 +1,28 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-export default function Dashboard_Funder(props) {
-  console.log("rendered");
-  const { uList } = props;
+const mockList = [
+  {
+    email: "sam@sam.com",
+    role: "2",
+  },
+];
+
+export default function DashboardFundraiser(props) {
+  // const { uList } = props;
   const history = useHistory();
-  console.log("array", uList);
 
   return (
     <div class="container">
-      {uList.map((User) => (
+      {mockList.map((User) => (
         <div class="container">
           <h2>email here{User.email}</h2>
           <h2>role here{User.role}</h2>
           <div
             class="container"
-            onClick={() => history.push(`/components/ProjectPage`)}
+            onClick={() => history.push(`/components/CreateProject`)}
           >
-            Browse Projects
+            Create Project
           </div>
         </div>
       ))}
