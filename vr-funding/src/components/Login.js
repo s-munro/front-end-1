@@ -47,10 +47,13 @@ const Login = () => {
           <label htmlFor="password">Password</label>
           <input name="password" id="password" type="password"></input>
         </div>
+        <a href=" ">Forgot your password?</a>
 
         <button>Sign in to SIXR</button>
         <br></br>
-        <a href=" ">Forgot your password?</a>
+        <br></br>
+        <button>Create Project</button>
+        <button>Fundable Projects</button>
       </form>
     </div>
   );
