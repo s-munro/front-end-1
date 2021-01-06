@@ -50,8 +50,10 @@ const Signup = () => {
           <input type='radio' id='funder' name='role' value='2' />
           <label for='funder'>Funder</label>
         </section>
+
         {/*Text Input Forms Based on API EndPoints: First Name, Last Name, Email, Password*/}
 
+        {/*Container for Name Label & First and Last Name Fields*/}
         <div
           style={{
             display: 'flex',
@@ -63,6 +65,8 @@ const Signup = () => {
           }}
         >
           <label>Name</label>
+
+          {/*Container for First and Last Name Fields*/}
           <div
             style={{
               display: 'flex',
@@ -70,6 +74,7 @@ const Signup = () => {
               justifyContent: 'space-between',
             }}
           >
+            {/*First Name Field*/}
             <input
               style={{
                 height: '30px',
@@ -81,6 +86,8 @@ const Signup = () => {
               type='text'
               placeholder='First Name'
             ></input>
+
+            {/*Last Name Field*/}
             <input
               style={{
                 height: '30px',
@@ -95,6 +102,7 @@ const Signup = () => {
           </div>
         </div>
 
+        {/*Container for Email Address Label & Field*/}
         <div
           style={{
             height: '25px',
@@ -104,6 +112,7 @@ const Signup = () => {
             justifyContent: 'space-between',
           }}
         >
+          {/*Email Address Label & Field*/}
           <label
             style={{
               color: 'black',
@@ -123,6 +132,8 @@ const Signup = () => {
             type='email'
           ></input>
         </div>
+
+        {/*Container for Password Label & Field*/}
         <div
           style={{
             height: '25px',
@@ -132,6 +143,7 @@ const Signup = () => {
             justifyContent: 'space-between',
           }}
         >
+          {/*Password Label & Field*/}
           <label
             style={{
               color: 'black',
@@ -151,6 +163,8 @@ const Signup = () => {
             type='password'
           ></input>
         </div>
+
+        {/*Create Account Button - On submit will send user data to API*/}
         <button style={{ width: '20%', margin: '2% auto' }}>
           Create Account
         </button>
