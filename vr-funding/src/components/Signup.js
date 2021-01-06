@@ -1,5 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import * as yup from 'yup';
+import { useHistory } from 'react-router-dom';
+
+const schema = yup.object().shape({
+  first_name: yup
+    .string()
+    .required('First name field is required.')
+    .min(2, 'Name must be at least two characters.'),
+  last_name: yup
+    .string()
+    .required('Last name field is required.')
+    .min(2, 'Name must be at least two characters.'),
+  email: yup.string().required('Email field is required.'),
+  password: yup
+    .string()
+    .required('Password field is required.')
+    .min(8, 'Password must be at least 8 characters.'),
+  role: yup.string().oneOf(['1', '2'], 'Please select a role.'),
+});
 
 // setting initial form values that will change dynamically every time the user changes the inputs
 const initialFormValues = {
@@ -25,32 +44,84 @@ const initialUsers = {
 };
 
 const Signup = () => {
+  const { push } = useHistory();
+
   const [userList, setUserList] = useState(initialUsers);
   const [formValues, setFormValues] = useState(initialFormValues);
+  const [disabled, setDisabled] = useState(true); //state that controls whether button is disabled
+  const [errors, setErrors] = useState({
+    //state that holds form verification error messages
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    role: '',
+  });
+  /*Disabling button unless form is validated */
+  useEffect(() => {
+    schema.isValid(formValues).then((valid) => setDisabled(!valid));
+  }, [formValues]);
+
+  const setFormErrors = (name, value) => {
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(() => setErrors({ ...errors, [name]: '' }))
+      .catch((err) => setErrors({ ...errors, [name]: err.errors[0] }));
+  };
 
   const handleChange = (e) => {
+    e.stopPropagation();
     setFormValues({
       ...formValues,
       [e.target.name]: e.target.value,
     });
+    console.log('Current User Input - Type to see changes...', formValues);
+    const { value, name } = e.target;
+    // const updatedInfo = type === 'checkbox' ? checked : value;
+    setFormErrors(name, value);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const newUser = {
-      first_name: formValues.first_name,
-      last_name: formValues.last_name,
-      email: formValues.email,
-      password: formValues.password,
+      first_name: 'First',
+      last_name: 'Last',
+      email: 'email@gmail.com',
+      password: '12345678',
+      role: 1,
+      id: 123,
+    };
+    /*const newUser = {
+      first_name: formValues.first_name.trim(),
+      last_name: formValues.last_name.trim(),
+      email: formValues.email.trim(),
+      password: formValues.password.trim(),
       role: formValues.role,
       id: Math.round(Math.random * 1000),
     };
+    Object.keys(newUser).forEach(function (role) {
+      newUser[role] = parseInt(newUser[role]);
+    });*/
     setUserList({
       ...userList,
       users: [...userList.users, newUser],
     });
     setFormValues(initialFormValues);
+    axios
+      .post('https://vr-fund.herokuapp.com/account/signup', newUser)
+      .then((res) => {
+        console.log('data: ', res.data);
+        setFormValues(initialFormValues);
+        window.localStorage.setItem('username', res.data.username);
+        window.localStorage.setItem('id', res.data.id);
+        push('/Login');
+      })
+      .catch((err) => {
+        console.log(err);
+        setFormValues(initialFormValues);
+      });
   };
-  console.log('Current User Input - Type to see changes...', formValues);
 
   return (
     <div>
@@ -77,7 +148,13 @@ const Signup = () => {
         >
           Create a SIXR Account
         </h1>
-
+        <div style={{ color: 'red' }} className='error-message'>
+          <div>{errors.first_name}</div>
+          <div>{errors.last_name}</div>
+          <div>{errors.email}</div>
+          <div>{errors.password}</div>
+          <div>{errors.role}</div>
+        </div>
         <section
           style={{
             color: 'black',
@@ -234,7 +311,7 @@ const Signup = () => {
         </div>
 
         {/*Create Account Button - On submit will send user data to API*/}
-        <button style={{ width: '20%', margin: '2% auto' }}>
+        <button disabled={disabled} style={{ width: '20%', margin: '2% auto' }}>
           Create Account
         </button>
       </form>
