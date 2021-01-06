@@ -1,9 +1,13 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavigationBar from "./components/NavigationBar";
 import ProjectPage from "./components/ProjectPage";
 import DashPageA from "./components/Dashboard_Fundrasier";
 import DashPageB from "./components/Dashboard_Funder";
+import dummyProData from './dummyProjectData';
+import Login from './components/Login';
+import SignUp from './components/Signup';
+
 import "./App.css";
 
 const defaultValues = {
@@ -11,13 +15,16 @@ const defaultValues = {
   role: "",
 };
 
-function App() {
+function fetchProjects() {
+  return Promise.resolve({ success: true, dummyProData });
+}
 
-  // const [login, setLogin] = useState(false);
-  // const [role, setRole] = useState();
+function App() {
 
   const [formValues, setFormValues] = useState(defaultValues);
   const [savedUserInfo, setSavedUserInfo] = useState([]);
+
+  const [projectList, setProjectList] = useState([]);
 
   const submit = (evt) => {
  
@@ -33,15 +40,20 @@ function App() {
   
   };
 
+  useEffect(() => {
+    fetchProjects().then((res) => setProjectList(res.dummyProData));
+  }, []);
+
   return (
     <Router>
       {/* <NavigationBar />
       <div className="App">
         <div></div>
       </div> */}
-      <Route path="/login"/>
+
+      <Route path="/login" component={Login}/>
       
-      <Route path="/signup" submit={submit}/> 
+      <Route path="/signup" submit={submit} component={SignUp}/> 
 
       <Route path="/projects" component={ProjectPage} />
 
