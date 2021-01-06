@@ -8,12 +8,14 @@ const Signup = () => {
         style={{
           display: 'flex',
           flexDirection: 'column',
-          border: '3px black solid',
+          boxShadow: '5px 10px #363131',
           margin: '2%',
+          backgroundColor: 'white',
         }}
       >
         <h1
           style={{
+            color: 'black',
             width: '50%',
             margin: 'auto',
             fontSize: '1.5rem',
@@ -23,7 +25,14 @@ const Signup = () => {
           Create a SIXR Account
         </h1>
 
-        <section style={{ width: '50%', margin: 'auto', textAlign: 'center' }}>
+        <section
+          style={{
+            color: 'black',
+            width: '50%',
+            margin: 'auto',
+            textAlign: 'center',
+          }}
+        >
           <p>Select your role:</p>
 
           {/*Radio Button 1: Fundraiser*/}
@@ -37,18 +46,24 @@ const Signup = () => {
         {/*Text Input Forms Based on API EndPoints: First Name, Last Name, Email, Password*/}
         <section
           style={{
-            width: '50%',
-            margin: 'auto',
+            color: 'black',
             textAlign: 'center',
+            display: 'flex',
+            margin: 'auto',
           }}
         >
-          <label htmlFor='first_name'>First Name</label>
-          <input id='first_name' type='text'></input>
-          <label htmlFor='last_name'>Last Name</label>
-          <input name='last_name' id='last_name' type='text'></input>
+          <div>
+            <label htmlFor='first_name'>First Name</label>
+            <input id='first_name' type='text'></input>
+          </div>
+          <div>
+            <label htmlFor='last_name'>Last Name</label>
+            <input name='last_name' id='last_name' type='text'></input>
+          </div>
         </section>
         <label
           style={{
+            color: 'black',
             width: '50%',
             margin: 'auto',
           }}
@@ -68,6 +83,7 @@ const Signup = () => {
         ></input>
         <label
           style={{
+            color: 'black',
             width: '50%',
             margin: 'auto',
           }}
@@ -92,7 +108,5 @@ const Signup = () => {
     </div>
   );
 };
-
-export default Signup;
 
 export default Signup;
