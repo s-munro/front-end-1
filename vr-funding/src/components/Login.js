@@ -1,6 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+
+const initialLoginValues = { email: "", password: "" };
+const initialLoginErrors = {
+  username: "",
+  password: "",
+};
+
+const initialDisabled = true;
 
 const Login = () => {
+  const { push } = useHistory();
+
+  const [loginValues, setLoginValues] = useState(initialLoginValues);
+  const [loginErrors, setLoginErrors] = useState(initialLoginErrors);
+  const [disabled, setDisabled] = useState(initialDisabled);
+
+  const loginSubmit = (evt) => {
+    evt.preventDefault();
+    const userCard = {
+      username: loginValues.username,
+      password: loginValues.password,
+    };
+    axios
+      .post("https://vr-fund.herokuapp.com/account/login", userCard)
+      .then((res) => {
+        console.log("successful login: ", res.data);
+        window.localStorage.setItem("token", res.data.token);
+        setLoginValues(initialLoginValues);
+        push("/ProjectList");
+      })
+      .catch((err) => {
+        console.log("Login Unsuccessful: ", err);
+        setLoginValues(initialLoginValues);
+      });
+  };
   return (
     <div>
       <h1>Sign In</h1>
@@ -15,7 +50,7 @@ const Login = () => {
 
         <button>Sign in to SIXR</button>
         <br></br>
-        <a href="">Forgot your password?</a>
+        <a href=" ">Forgot your password?</a>
       </form>
     </div>
   );
