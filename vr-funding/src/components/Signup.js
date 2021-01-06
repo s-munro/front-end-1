@@ -3,7 +3,7 @@ import React from 'react';
 const Signup = () => {
   return (
     <div>
-      {/* Note: I will be using inline CSS temporarily to avoid merge conflicts until we can combine it on one stylesheet */}
+      {/* Note:  The inline CSS below is temporary until we all agree on a style guide - will likely be deleted later*/}
       <form
         style={{
           display: 'flex',
@@ -18,7 +18,7 @@ const Signup = () => {
             color: 'black',
             width: '50%',
             margin: 'auto',
-            fontSize: '1.5rem',
+            fontSize: '1.8rem',
             textAlign: 'center',
           }}
         >
@@ -31,9 +31,16 @@ const Signup = () => {
             width: '50%',
             margin: 'auto',
             textAlign: 'center',
+            fontSize: '1.3rem',
           }}
         >
-          <p>Select your role:</p>
+          <p
+            style={{
+              fontSize: '1.3rem',
+            }}
+          >
+            Select your role:
+          </p>
 
           {/*Radio Button 1: Fundraiser*/}
           <input type='radio' id='fundraiser' name='role' value='1' />
@@ -47,60 +54,106 @@ const Signup = () => {
         <section
           style={{
             color: 'black',
-            textAlign: 'center',
-            display: 'flex',
-            margin: 'auto',
+            fontSize: '1.4rem',
           }}
         >
-          <div>
-            <label htmlFor='first_name'>First Name</label>
-            <input id='first_name' type='text'></input>
-          </div>
-          <div>
-            <label htmlFor='last_name'>Last Name</label>
-            <input name='last_name' id='last_name' type='text'></input>
+          <div
+            style={{
+              display: 'flex',
+              width: '70%',
+              margin: '2% auto',
+              justifyContent: 'space-between',
+            }}
+          >
+            <label>Name</label>
+            <div
+              style={{
+                display: 'flex',
+                width: '80%',
+                justifyContent: 'space-between',
+              }}
+            >
+              <input
+                style={{
+                  height: '30px',
+                  width: '45%',
+                  fontSize: '1rem',
+                }}
+                id='first_name'
+                name='first_name'
+                type='text'
+                placeholder='First Name'
+              ></input>
+              <input
+                style={{
+                  height: '30px',
+                  width: '45%',
+                  fontSize: '1rem',
+                }}
+                name='last_name'
+                id='last_name'
+                type='text'
+                placeholder='Last Name'
+              ></input>
+            </div>
           </div>
         </section>
-        <label
+        <div
           style={{
-            color: 'black',
-            width: '50%',
-            margin: 'auto',
+            height: '25px',
+            display: 'flex',
+            width: '70%',
+            margin: '2% auto',
+            justifyContent: 'space-between',
           }}
-          htmlFor='email'
         >
-          Email Address
-        </label>
-        <input
+          <label
+            style={{
+              color: 'black',
+              fontSize: '1.3rem',
+            }}
+            htmlFor='email'
+          >
+            Email Address
+          </label>
+          <input
+            style={{
+              height: '30px',
+              width: '79%',
+            }}
+            name='email'
+            id='email'
+            type='email'
+          ></input>
+        </div>
+        <div
           style={{
-            width: '50%',
-            margin: 'auto',
-            textAlign: 'center',
+            height: '25px',
+            display: 'flex',
+            width: '70%',
+            margin: ' 2% auto',
+            justifyContent: 'space-between',
           }}
-          name='email'
-          id='email'
-          type='text'
-        ></input>
-        <label
-          style={{
-            color: 'black',
-            width: '50%',
-            margin: 'auto',
-          }}
-          htmlFor='password'
         >
-          Password (must be at least 6 characters)
-        </label>
-        <input
-          style={{
-            width: '50%',
-            margin: 'auto',
-            textAlign: 'center',
-          }}
-          name='password'
-          id='password'
-          type='password'
-        ></input>
+          <label
+            style={{
+              color: 'black',
+              fontSize: '1.3rem',
+            }}
+            htmlFor='password'
+          >
+            Password*
+          </label>
+          <input
+            style={{
+              height: '30px',
+              width: '79%',
+            }}
+            name='password'
+            id='password'
+            type='password'
+          ></input>
+        </div>
         <button style={{ width: '20%', margin: '2% auto' }}>
           Create Account
         </button>
