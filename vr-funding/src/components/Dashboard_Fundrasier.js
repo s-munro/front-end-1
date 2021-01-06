@@ -1,20 +1,21 @@
 import React from "react";
-import { Router } from "react-router";
+import { useHistory } from "react-router-dom";
 
 
 
-const DashBoard = () => {
+const DashBoardA = () => {
+  const history = useHistory();
   return <div class="container">
 <div class="container">
 <p>
  AAA Funderaiser dynamic -user, role info 
 </p>
 </div>
-<div class="container">Abtn</div>
+<div class="container" onClick={() => history.push(`/components/CreateProject`)}>Create Project</div>
 </div>;
 };
 
-export default DashBoard;
+export default DashBoardA;
 
 
 

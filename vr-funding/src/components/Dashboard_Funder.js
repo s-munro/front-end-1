@@ -1,20 +1,21 @@
 import React from "react";
-import { Router } from "react-router";
+import { useHistory } from "react-router-dom";
 
 
 
-const DashBoard = () => {
+const DashBoardB = () => {
+  const history = useHistory();
   return <div class="container">
 <div class="container">
 <p>
  BBB Fundser dynamic - user, role info
 </p>
 </div>
-<div class="container">Bbtn</div>
+<div class="container" onClick={() => history.push(`/components/ProjectPage`)}>Browse Projects</div>
 </div>;
 };
 
-export default DashBoard;
+export default DashBoardB;
 
 
 
