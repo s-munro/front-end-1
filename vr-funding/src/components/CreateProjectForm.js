@@ -15,24 +15,80 @@ export default function WorkerForm(props) {
         <form className='form container' onSubmit={onSubmit}>
             <div className='form-group-inputs'>
             <label>
-                Project Submission
+                Project Title
                 <input
                 type="text"
-                name="Project submission"
+                name="Project Title"
                 onChange={onChange}
-                value={values.Project}
-                placeholder="Briefly describe project idea"
+                value={values.ProjectTitle}
+                placeholder="Project Title"
+                maxLength="20"
+                ></input>
+            </label>
+            <label>
+                Project Type
+                <input
+                type='text'
+                name='Project Type'
+                onChange={onChange}
+                value={values.ProjectType}
+                placeholder='Project Type'
+                maxLength="20"
+                ></input>
+            </label>
+            <label>
+                Mission Statement
+                <input
+                type="text"
+                name="Mission Statement"
+                onChange={onChange}
+                value={values.MissionStatement}
+                placeholder="Mission Statement"
                 maxLength="100"
                 ></input>
             </label>
             <label>
-                Email
+                Project Description
                 <input
-                type='email'
-                name='email'
+                type="text"
+                name="Project Description"
                 onChange={onChange}
-                value={values.email}
-                placeholder='email'
+                value={values.ProjectDescription}
+                placeholder="Project Description"
+                maxLength="100"
+                ></input>
+            </label>
+            <label>
+                Funding Amount
+                <input
+                type="text"
+                name="Funding Amount"
+                onChange={onChange}
+                value={values.FundingAmount}
+                placeholder="Funding Amount"
+                maxLength="20"
+                ></input>
+            </label>
+            <label>
+                Amount Raised
+                <input
+                type="text"
+                name="Amount Raised"
+                onChange={onChange}
+                value={values.AmountRaised}
+                placeholder="Amount Raised"
+                maxLength="20"
+                ></input>
+            </label>
+            <label>
+                Project Timeline
+                <input
+                type="text"
+                name="Roject Timeline"
+                onChange={onChange}
+                value={values.ProjectTimeline}
+                placeholder="ProjectTimeline"
+                maxLength="20"
                 ></input>
             </label>
             </div>
