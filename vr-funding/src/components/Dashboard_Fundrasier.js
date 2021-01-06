@@ -3,19 +3,20 @@ import { useHistory } from "react-router-dom";
 
 
 
-const DashBoardA = () => {
+export default function DashBoardA(props) {
+  const { uList } = props;
   const history = useHistory();
-  return <div class="container">
-<div class="container">
-<p>
- AAA Funderaiser dynamic -user, role info 
-</p>
-</div>
-<div class="container" onClick={() => history.push(`/components/CreateProject`)}>Create Project</div>
-</div>;
-};
-
-export default DashBoardA;
-
-
-
+  console.log('array', uList);
+      return(
+      <div class="container">{
+          uList.map((User) => (
+          <div class="container">
+              <h2>email here{User.email}</h2>
+              <h2>role here{User.role}</h2>
+              <div class="container" onClick={() => history.push(`/components/CreateProject`)}>Create Project</div>
+          </div>
+          
+      ))
+  }</div>
+  )
+}
