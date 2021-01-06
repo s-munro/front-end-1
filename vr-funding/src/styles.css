@@ -14,7 +14,17 @@ body {
     flex-direction: row;
 
   }
+  .project-card{
+    border: 2px solid #48e02a;
+    box-shadow: 0px 1px 6px -2px #807f7f;
+    border-radius: 8px;
+    margin-top: 14px;
+    margin-left: 10px;
+    padding: 14px;
+    display: flex;
+    flex-direction: row;
 
+  }
 
 
   button {
