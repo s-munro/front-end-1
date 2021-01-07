@@ -38,7 +38,7 @@ const CreateProjectForm = (props) => {
       amount_raised: parseInt(values.amount_raised),
       project_timeline: values.project_timeline,
     };
-    console.log(newProject);
+    console.log("My project", newProject);
 
     axiosWithAuth()
       .post("projects", newProject)
