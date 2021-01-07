@@ -17,7 +17,7 @@ const schema = yup.object().shape({
     .string()
     .required('Password field is required.')
     .min(8, 'Password must be at least 8 characters.'),
-  role: yup.string().oneOf(['1', '2'], 'Please select a role.'),
+  role: yup.number().oneOf([1, 2], 'Please select a role.'),
 });
 
 // setting initial form values that will change dynamically every time the user changes the inputs
@@ -69,40 +69,41 @@ const Signup = () => {
       .then(() => setErrors({ ...errors, [name]: '' }))
       .catch((err) => setErrors({ ...errors, [name]: err.errors[0] }));
   };
-
+  const roleChange = (e) => {
+    var a = parseInt(e.target.value);
+    console.log(a);
+    setFormValues({
+      ...formValues,
+      role: a,
+    });
+  };
   const handleChange = (e) => {
+    const { value, name } = e.target;
+    console.log(initialUsers.id);
     e.stopPropagation();
+
     setFormValues({
       ...formValues,
       [e.target.name]: e.target.value,
     });
+
     console.log('Current User Input - Type to see changes...', formValues);
-    const { value, name } = e.target;
-    // const updatedInfo = type === 'checkbox' ? checked : value;
+
     setFormErrors(name, value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const newUser = {
-      first_name: 'First',
-      last_name: 'Last',
-      email: 'email@gmail.com',
-      password: '12345678',
-      role: 1,
-      id: 123,
-    };
-    /*const newUser = {
       first_name: formValues.first_name.trim(),
       last_name: formValues.last_name.trim(),
       email: formValues.email.trim(),
       password: formValues.password.trim(),
       role: formValues.role,
-      id: Math.round(Math.random * 1000),
+      id: Math.floor(Math.random() * 100),
     };
-    Object.keys(newUser).forEach(function (role) {
-      newUser[role] = parseInt(newUser[role]);
-    });*/
+
     setUserList({
       ...userList,
       users: [...userList.users, newUser],
@@ -113,12 +114,11 @@ const Signup = () => {
       .then((res) => {
         console.log('data: ', res.data);
         setFormValues(initialFormValues);
-        window.localStorage.setItem('username', res.data.username);
-        window.localStorage.setItem('id', res.data.id);
         push('/Login');
       })
       .catch((err) => {
         console.log(err);
+        console.log(newUser);
         setFormValues(initialFormValues);
       });
   };
@@ -174,7 +174,8 @@ const Signup = () => {
 
           {/*Radio Button 1: Fundraiser*/}
           <input
-            onChange={handleChange}
+            onChange={roleChange}
+            className='role'
             type='radio'
             id='fundraiser'
             name='role'
@@ -184,7 +185,8 @@ const Signup = () => {
 
           {/*Radio Button 2: Funder*/}
           <input
-            onChange={handleChange}
+            onChange={roleChange}
+            className='role'
             type='radio'
             id='funder'
             name='role'
@@ -227,6 +229,7 @@ const Signup = () => {
               name='first_name'
               type='text'
               placeholder='First Name'
+              value={formValues.first_name}
               onChange={handleChange}
             ></input>
 
@@ -241,6 +244,7 @@ const Signup = () => {
               id='last_name'
               type='text'
               placeholder='Last Name'
+              value={formValues.last_name}
               onChange={handleChange}
             ></input>
           </div>
@@ -274,6 +278,7 @@ const Signup = () => {
             name='email'
             id='email'
             type='email'
+            value={formValues.email}
             onChange={handleChange}
           ></input>
         </div>
@@ -306,10 +311,13 @@ const Signup = () => {
             name='password'
             id='password'
             type='password'
+            value={formValues.password}
             onChange={handleChange}
           ></input>
         </div>
-
+        <p style={{ color: 'black', textAlign: 'center' }}>
+          *Password must be at least 8 characters
+        </p>
         {/*Create Account Button - On submit will send user data to API*/}
         <button disabled={disabled} style={{ width: '20%', margin: '2% auto' }}>
           Create Account
