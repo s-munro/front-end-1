@@ -53,9 +53,14 @@ function App() {
 
         <Route
           path="/projects"
-          render={(props) => <ProjectPage {...props} projects={projectList} />}
+          render={(props) => (
+            <ProjectPage
+              {...props}
+              //  projects={projectList}
+            />
+          )}
         />
-        <PrivateRoute exact path="/dashboard" uList={savedUserInfo} />
+        <PrivateRoute exact path="/" uList={savedUserInfo} />
       </Switch>
     </Router>
   );
