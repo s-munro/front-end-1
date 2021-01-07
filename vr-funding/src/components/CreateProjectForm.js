@@ -42,13 +42,11 @@ const CreateProjectForm = (props) => {
     axiosWithAuth()
       .post("projects", newProject)
       .then((res) => {
-        console.log("res: ", res);
         setValues(initialFormValues);
         props.fetchProjects();
         history.push("/projects");
       })
       .catch((err) => {
-        console.log("err: ", err);
         setValues(initialFormValues);
       });
   };

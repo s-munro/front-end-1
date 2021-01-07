@@ -15,7 +15,6 @@ const PrivateRoute = ({ uList, ...rest }) => {
             return <DashboardFunder {...props} />;
           }
         } else {
-          console.log("nope");
           return <Redirect to="/login" />;
         }
       }}

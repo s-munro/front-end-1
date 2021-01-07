@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { setRole } from "../actions/index";
+import { setRole, fetchUserProjects } from "../actions/index";
 
 import UserProjectsList from "./UserProjectsList";
 
@@ -20,10 +20,10 @@ const DashboardFundraiser = (props) => {
 
   useEffect(() => {
     props.setRole();
+    props.fetchUserProjects(window.localStorage.getItem("id"));
   }, []);
 
   const handleClick = (e) => {
-    console.log("click");
     setProjectsVisible(!projectsVisible);
   };
 
@@ -50,7 +50,11 @@ const DashboardFundraiser = (props) => {
 };
 const mapStateToProps = (state) => {
   return {
+    id: state.id,
     role: state.role,
+    userProjects: state.userProjects,
   };
 };
-export default connect(mapStateToProps, { setRole })(DashboardFundraiser);
+export default connect(mapStateToProps, { setRole, fetchUserProjects })(
+  DashboardFundraiser
+);

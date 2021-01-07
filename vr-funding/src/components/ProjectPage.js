@@ -39,6 +39,7 @@ const ProjectList = (props) => {
   }, []);
 
   return (
+
     <ProjListStyled>
       <div className="project-list">
         {projects.map((project) => (
