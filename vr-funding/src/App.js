@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-// import NavigationBar from "./components/NavigationBar";
+import NavigationBar from "./components/NavigationBar";
 import ProjectPage from "./components/ProjectPage";
-import DashboardFundraiser from "./components/Dashboard_Fundraiser";
-import DashboardFunder from "./components/Dashboard_Funder";
+
 import dummyProData from "./dummyProjectData";
+import PrivateRoute from "./utils/PrivateRoute";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
 
@@ -45,10 +45,7 @@ function App() {
 
   return (
     <Router>
-      {/* <NavigationBar />
-      <div className="App">
-        <div></div>
-      </div> */}
+      <NavigationBar />
       <Switch>
         <Route path="/login" component={Login} />
 
@@ -58,20 +55,7 @@ function App() {
           path="/projects"
           render={(props) => <ProjectPage {...props} projects={projectList} />}
         />
-
-        <Route
-          path="/dashboard_fundraiser"
-          render={(props) => (
-            <DashboardFundraiser {...props} uList={savedUserInfo} />
-          )}
-        />
-
-        <Route
-          path="/dashboard_fundraiser"
-          render={(props) => (
-            <DashboardFunder {...props} uList={savedUserInfo} />
-          )}
-        />
+        <PrivateRoute exact path="/dashboard" uList={savedUserInfo} />
       </Switch>
     </Router>
   );
