@@ -134,15 +134,15 @@ const Signup = () => {
           flexDirection: 'column',
           boxShadow: '5px 10px #363131',
           margin: '2%',
-          backgroundColor: 'white',
         }}
       >
         <h1
           style={{
-            color: 'black',
+            color: '#ebeae4',
+            fontSize: '2.5rem',
+            fontWeight: 'bold',
             width: '50%',
-            margin: 'auto',
-            fontSize: '1.8rem',
+            margin: '2% auto',
             textAlign: 'center',
           }}
         >
@@ -157,16 +157,17 @@ const Signup = () => {
         </div>
         <section
           style={{
-            color: 'black',
+            color: '#ebeae4',
             width: '50%',
             margin: 'auto',
             textAlign: 'center',
-            fontSize: '1.3rem',
+            fontSize: '1.8rem',
           }}
         >
           <p
             style={{
-              fontSize: '1.3rem',
+              fontSize: '1.8rem',
+              fontWeight: 'bold',
             }}
           >
             Select your role:
@@ -204,8 +205,9 @@ const Signup = () => {
             width: '70%',
             margin: '2% auto',
             justifyContent: 'space-between',
-            color: 'black',
-            fontSize: '1.4rem',
+            color: '#ebeae4',
+            fontSize: '1.8rem',
+            fontWeight: 'bold',
           }}
         >
           <label>Name</label>
@@ -263,8 +265,9 @@ const Signup = () => {
           {/*Email Address Label & Field*/}
           <label
             style={{
-              color: 'black',
-              fontSize: '1.3rem',
+              color: '#ebeae4',
+              fontSize: '1.8rem',
+              fontWeight: 'bold',
             }}
             htmlFor='email'
           >
@@ -296,8 +299,9 @@ const Signup = () => {
           {/*Password Label & Field*/}
           <label
             style={{
-              color: 'black',
-              fontSize: '1.3rem',
+              color: '#ebeae4',
+              fontWeight: 'bold',
+              fontSize: '1.8rem',
             }}
             htmlFor='password'
           >
@@ -315,7 +319,7 @@ const Signup = () => {
             onChange={handleChange}
           ></input>
         </div>
-        <p style={{ color: 'black', textAlign: 'center' }}>
+        <p style={{ color: '#ebeae4', textAlign: 'center' }}>
           *Password must be at least 8 characters
         </p>
         {/*Create Account Button - On submit will send user data to API*/}
