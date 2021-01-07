@@ -5,10 +5,11 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./styles.css";
 import { createStore, applyMiddleware, compose } from "redux";
-import { Provider } from "react-redux";
+//import { Provider } from "react-redux";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
-
+import { ThemeProvider } from "styled-components";
+import theme from "./theme";
 import reducer from "./reducers";
 
 const composeEnhancers = window.REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;
@@ -18,9 +19,11 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <Provider store={store}>
+  <ThemeProvider theme={theme} store={store}>
+  {/* <Provider > */}
     <App />
-  </Provider>,
+  {/* </Provider> */}
+  </ThemeProvider>,
   document.getElementById("root")
 );
 

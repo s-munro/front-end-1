@@ -2,6 +2,45 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as yup from 'yup';
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
+
+
+const TitleStyled = styled.div`
+  color: ${(pr) => pr.theme.secondaryColor};
+  font-size: 2.5rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+`;
+
+const LableAStyled = styled.div`
+  padding:10px;
+  color: ${(pr) => pr.theme.secondaryColor};
+  font-size: "10rem";
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  height: "25px";
+  width: "70%";
+  margin: " 2% auto";
+  justify-content: space-between;
+  align-content: space-between;
+`;
+
+const BtnsStyled = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: space-between;
+  padding-bottom:15px;
+`;
+
+const BtnSpacerStyled = styled.div`
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between;
+  align-content: space-between; */
+  `;
 
 const schema = yup.object().shape({
   mail: yup.string().required('Email field is required.'),
@@ -61,76 +100,60 @@ const Login = () => {
   };
   return (
     <div>
-      <h1>Sign In</h1>
-      <div
-        style={{
-          height: "25px",
-          display: "flex",
-          width: "70%",
-          margin: " 2% auto",
-          justifyContent: "space-between",
-        }}
-      >
-        {/*Password Label & Field*/}
-        <label
-          style={{
-            color: "black",
-            fontSize: "1.3rem",
-          }}
-          htmlFor="password"
-        >
-          Email
-        </label>
-        <input
-          style={{
-            height: "30px",
-            width: "79%",
-          }}
-          name="email"
-          id="email"
-          type="email"
-        ></input>
-      </div>
-      <div
-        style={{
-          height: "25px",
-          display: "flex",
-          width: "70%",
-          margin: "2% auto",
-          justifyContent: "space-between",
-        }}
-      >
-        {/*Email Address Label & Field*/}
-        <label
-          style={{
-            color: "black",
-            fontSize: "1.3rem",
-          }}
-          htmlFor="email"
-        >
-          Password
-        </label>
-        <input
-          style={{
-            height: "30px",
-            width: "79%",
-          }}
-          name="password"
-          id="password"
-          type="password"
-        ></input>
-      </div>
+      <TitleStyled>
+      <p>Sign In</p>
+      </TitleStyled>
+
+      <LableAStyled>
+          <label  style={{
+             fontSize: "1.8rem",
+          }} htmlFor="password">
+            Email
+          </label>
+          <input
+            style={{
+              height: "30px",
+              width: "79%",
+            }}
+            name="email"
+            id="email"
+            type="email"
+          ></input>
+      </LableAStyled>
+
+      <LableAStyled>
+          <label style={{
+             fontSize: "1.8rem",
+          }} htmlFor="email">
+            Password
+          </label>
+          <input
+            style={{
+              height: "30px",
+              width: "79%",
+            }}
+            name="password"
+            id="password"
+            type="password"
+          ></input>
+      </LableAStyled>      
+
+      <BtnsStyled>
       <form onSubmit={loginSubmit}>
         <a href=" ">Forgot your password?</a>
         <br></br>
-        <button disabled={disabled} style={{ width: "20%", margin: "2% auto" }}>
+        <button disabled={disabled} style={{ width: "60%", margin: "2% auto" }}>
           Sign in to SIXR
         </button>
         <br></br>
         <br></br>
-        <button>Create Project</button>
-        <button>Fundable Projects</button>
+      <BtnSpacerStyled>
+        <button style={{ fontSize: "1.7rem", color: "#46e38f", backgroundColor:"#615e5e",}}>Create Project</button>
+        <div style={{ width: "7%",}}></div>
+        <button style={{ fontSize: "1.7rem", color: "#46e38f", backgroundColor:"#615e5e",}}>Fundable Projects</button>
+      </BtnSpacerStyled>  
       </form>
+      </BtnsStyled>
     </div>
   );
 };
