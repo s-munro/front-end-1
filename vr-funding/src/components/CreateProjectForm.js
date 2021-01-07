@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
+import { useHistory } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { fetchProjects } from "../actions/index";
@@ -17,7 +18,7 @@ const initialFormValues = {
 const CreateProjectForm = (props) => {
   const [values, setValues] = useState(initialFormValues);
 
-  console.log("create page");
+  const history = useHistory();
 
   const onChange = (evt) => {
     evt.persist();
@@ -26,7 +27,6 @@ const CreateProjectForm = (props) => {
   };
 
   const onSubmit = (evt) => {
-    console.log("values: ", values);
     evt.preventDefault();
 
     const newProject = {
@@ -38,7 +38,6 @@ const CreateProjectForm = (props) => {
       amount_raised: parseInt(values.amount_raised),
       project_timeline: values.project_timeline,
     };
-    console.log("My project", newProject);
 
     axiosWithAuth()
       .post("projects", newProject)
@@ -46,6 +45,7 @@ const CreateProjectForm = (props) => {
         console.log("res: ", res);
         setValues(initialFormValues);
         props.fetchProjects();
+        history.push("/projects");
       })
       .catch((err) => {
         console.log("err: ", err);

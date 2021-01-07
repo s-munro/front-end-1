@@ -19,17 +19,35 @@ const ProjectList = (props) => {
         <div className="project-card" key={project.id}>
           {/* <Link to={`${url}/${project.id}`}> */}
           <div className="project-card">
-            <p>{project.title}</p>
+            <p>{project.project_title}</p>
           </div>
           {/* </Link> */}
 
           <div className="project-card">
-            <p>{project.discription}</p>
+            <p>{project.project_description}</p>
           </div>
 
           <div className="project-card">
-            <p>Click Here to Fund!</p>
+            <p>
+              Mission Statement: <br />
+              {project.mission_statement}
+            </p>
           </div>
+
+          <div className="project-card">
+            <p>Timeline: {project.project_timeline}</p>
+          </div>
+
+          <div className="project-card">
+            <p>
+              ${project.amount_raised}/${project.funding_amount}
+            </p>
+          </div>
+          {props.role === 2 ? (
+            <div className="project-card">
+              <p>Click Here to Fund!</p>
+            </div>
+          ) : null}
         </div>
       ))}
     </div>
