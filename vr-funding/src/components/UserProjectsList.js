@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { fetchProjects, fetchUserProjects } from "../actions/index";
 
-const UserProjectsList = () => {
+import UserProject from "./UserProject";
+
+const UserProjectsList = (props) => {
   //projects.map
   //render project component
   //edit button
   //delete button
   return (
     <div>
-      I'm a project
-      <div></div>
+      {props.userProjects.map((project) => {
+        return <UserProject project={project} key={project.project_id} />;
+      })}
     </div>
   );
 };
 
-export default UserProjectsList;
+const mapStateToProps = (state) => {
+  return {
+    id: state.id,
+    projects: state.projects,
+    userProjects: state.userProjects,
+  };
+};
+export default connect(mapStateToProps, { fetchProjects, fetchUserProjects })(
+  UserProjectsList
+);

@@ -15,6 +15,10 @@ const ProjectList = (props) => {
 
   return (
     <div className="project-list">
+      <div>
+        {props.errorText !== null ? <div>{props.errorText}</div> : null}
+      </div>
+
       {projects.map((project) => (
         <div className="project-card" key={project.id}>
           {/* <Link to={`${url}/${project.id}`}> */}
