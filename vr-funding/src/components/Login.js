@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import * as yup from 'yup';
 import { useHistory } from "react-router-dom";
+
+const schema = yup.object().shape({
+  mail: yup.string().required('Email field is required.'),
+  password: yup
+    .string()
+    .required('Password field is required.')
+    .min(8, 'Password must be at least 8 characters.')
+});
+
 
 const initialLoginValues = { email: "", password: "" };
 const initialLoginErrors = {
@@ -17,6 +27,12 @@ const Login = () => {
   const [loginErrors, setLoginErrors] = useState(initialLoginErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
 
+  useEffect(() => {
+    schema.isValid(loginValues).then((valid) => setDisabled(!valid));
+  }, [loginValues]);
+
+
+  
   const loginSubmit = (evt) => {
     evt.preventDefault();
     const userCard = {
@@ -46,17 +62,70 @@ const Login = () => {
   return (
     <div>
       <h1>Sign In</h1>
+      <div
+        style={{
+          height: "25px",
+          display: "flex",
+          width: "70%",
+          margin: " 2% auto",
+          justifyContent: "space-between",
+        }}
+      >
+        {/*Password Label & Field*/}
+        <label
+          style={{
+            color: "black",
+            fontSize: "1.3rem",
+          }}
+          htmlFor="password"
+        >
+          Email
+        </label>
+        <input
+          style={{
+            height: "30px",
+            width: "79%",
+          }}
+          name="email"
+          id="email"
+          type="email"
+        ></input>
+      </div>
+      <div
+        style={{
+          height: "25px",
+          display: "flex",
+          width: "70%",
+          margin: "2% auto",
+          justifyContent: "space-between",
+        }}
+      >
+        {/*Email Address Label & Field*/}
+        <label
+          style={{
+            color: "black",
+            fontSize: "1.3rem",
+          }}
+          htmlFor="email"
+        >
+          Password
+        </label>
+        <input
+          style={{
+            height: "30px",
+            width: "79%",
+          }}
+          name="password"
+          id="password"
+          type="password"
+        ></input>
+      </div>
       <form onSubmit={loginSubmit}>
-        <div className="login-forms">
-          <label htmlFor="email">Email</label>
-          <input id="email" type="text"></input>
-          <br></br>
-          <label htmlFor="password">Password</label>
-          <input name="password" id="password" type="password"></input>
-        </div>
         <a href=" ">Forgot your password?</a>
-
-        <button>Sign in to SIXR</button>
+        <br></br>
+        <button disabled={disabled} style={{ width: "20%", margin: "2% auto" }}>
+          Sign in to SIXR
+        </button>
         <br></br>
         <br></br>
         <button>Create Project</button>
