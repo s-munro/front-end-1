@@ -24,7 +24,6 @@ const DashboardFundraiser = (props) => {
   }, []);
 
   const handleClick = (e) => {
-    console.log("click");
     setProjectsVisible(!projectsVisible);
   };
 
