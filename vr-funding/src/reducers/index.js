@@ -3,6 +3,7 @@ import {
   FETCHING_PROJECTS_SUCCESS,
   FETCHING_PROJECTS_FAIL,
   SET_ROLE,
+  SET_ID,
   SET_EDITING,
   FETCH_USER_PROJECTS_START,
   FETCH_USER_PROJECTS_SUCCESS,
@@ -15,6 +16,7 @@ const initialState = {
   projects: [],
   userProjects: [],
   role: "",
+  id: "",
   editedProject: {
     amount_raised: "",
     funding_amount: "",
@@ -38,6 +40,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, isLoading: false, errorText: action.payload };
     case SET_ROLE:
       return { ...state, role: action.payload };
+    case SET_ID:
+      return { ...state, id: action.payload };
     case SET_EDITING:
       return { ...state, editedProject: action.payload };
     case FETCH_USER_PROJECTS_START:

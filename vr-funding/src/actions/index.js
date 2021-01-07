@@ -5,6 +5,7 @@ export const FETCHING_PROJECTS_SUCCESS = "FETCHING_PROJECTS_SUCCESS";
 export const FETCHING_PROJECTS_FAIL = "FETCHING_PROJECTS_FAIL";
 
 export const SET_ROLE = "SET_ROLE";
+export const SET_ID = "SET_ID";
 
 export const FETCH_USER_PROJECTS_START = "FETCH_USER_PROJECTS_START";
 export const FETCH_USER_PROJECTS_SUCCESS = "FETCH_USER_PROJECTS_SUCCESS";
@@ -32,8 +33,11 @@ export const fetchUserProjects = (id) => (dispatch) => {
   axiosWithAuth()
     .get(`user/${id}`)
     .then((res) => {
-      console.log("res user fetch: ", res);
-      dispatch({ FETCH_USER_PROJECTS_SUCCESS, payload: res.data });
+      console.log("res user fetch: ", res.data);
+      dispatch({
+        type: FETCH_USER_PROJECTS_SUCCESS,
+        payload: res.data.projects,
+      });
     })
     .catch((err) => {
       console.log("err: ", err);
@@ -41,8 +45,12 @@ export const fetchUserProjects = (id) => (dispatch) => {
     });
 };
 
-export const setRole = () => {
+export const setRole = (role) => {
   return { type: SET_ROLE, payload: localStorage.getItem("role") };
+};
+
+export const setId = (id) => {
+  return { type: SET_ID, payload: id };
 };
 
 export const setEditing = (projectToEdit) => {
