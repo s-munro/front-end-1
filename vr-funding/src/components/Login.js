@@ -77,7 +77,6 @@ const Login = (props) => {
       email: loginValues.username,
       password: loginValues.password,
     };
-    console.log("click, usercard: ", userCard);
 
     const testUser = {
       email: "email@gmail.com",
@@ -86,7 +85,6 @@ const Login = (props) => {
     axios
       .post("https://vr-fund.herokuapp.com/account/login", testUser)
       .then((res) => {
-        console.log("successful login: ", res.data);
         window.localStorage.setItem("token", res.data.token);
         window.localStorage.setItem("role", res.data.role);
         window.localStorage.setItem("id", res.data.id);
@@ -96,7 +94,6 @@ const Login = (props) => {
         push("/dashboard");
       })
       .catch((err) => {
-        console.log("Login Unsuccessful: ", err);
         setLoginValues(initialLoginValues);
       });
   };

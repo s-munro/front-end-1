@@ -4,10 +4,8 @@ import { connect } from "react-redux";
 import { setRole } from "../actions/index";
 
 const Dashboard_Funder = (props) => {
-  console.log("rendered");
   const { uList } = props;
   const history = useHistory();
-  console.log("array", uList);
 
   useEffect(() => {
     props.setRole();

@@ -1,43 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import * as yup from 'yup';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import * as yup from "yup";
+import { useHistory } from "react-router-dom";
 
 const schema = yup.object().shape({
   first_name: yup
     .string()
-    .required('First name field is required.')
-    .min(2, 'Name must be at least two characters.'),
+    .required("First name field is required.")
+    .min(2, "Name must be at least two characters."),
   last_name: yup
     .string()
-    .required('Last name field is required.')
-    .min(2, 'Name must be at least two characters.'),
-  email: yup.string().required('Email field is required.'),
+    .required("Last name field is required.")
+    .min(2, "Name must be at least two characters."),
+  email: yup.string().required("Email field is required."),
   password: yup
     .string()
-    .required('Password field is required.')
-    .min(8, 'Password must be at least 8 characters.'),
-  role: yup.number().oneOf([1, 2], 'Please select a role.'),
+    .required("Password field is required.")
+    .min(8, "Password must be at least 8 characters."),
+  role: yup.number().oneOf([1, 2], "Please select a role."),
 });
 
 // setting initial form values that will change dynamically every time the user changes the inputs
 const initialFormValues = {
-  first_name: '',
-  last_name: '',
-  email: '',
-  password: '',
-  role: '',
+  first_name: "",
+  last_name: "",
+  email: "",
+  password: "",
+  role: "",
 };
 
 // organizing data set to be POSTED to API - dynamic values will be added here once form is submitted
 const initialUsers = {
   users: [
     {
-      first_name: '',
-      last_name: '',
-      email: '',
-      password: '',
-      role: '',
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: "",
+      role: "",
       id: Math.round(Math.random() * 1000),
     },
   ],
@@ -51,11 +51,11 @@ const Signup = () => {
   const [disabled, setDisabled] = useState(true); //state that controls whether button is disabled
   const [errors, setErrors] = useState({
     //state that holds form verification error messages
-    first_name: '',
-    last_name: '',
-    email: '',
-    password: '',
-    role: '',
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    role: "",
   });
   /*Disabling button unless form is validated */
   useEffect(() => {
@@ -66,12 +66,11 @@ const Signup = () => {
     yup
       .reach(schema, name)
       .validate(value)
-      .then(() => setErrors({ ...errors, [name]: '' }))
+      .then(() => setErrors({ ...errors, [name]: "" }))
       .catch((err) => setErrors({ ...errors, [name]: err.errors[0] }));
   };
   const roleChange = (e) => {
     var a = parseInt(e.target.value);
-    console.log(a);
     setFormValues({
       ...formValues,
       role: a,
@@ -79,15 +78,12 @@ const Signup = () => {
   };
   const handleChange = (e) => {
     const { value, name } = e.target;
-    console.log(initialUsers.id);
     e.stopPropagation();
 
     setFormValues({
       ...formValues,
       [e.target.name]: e.target.value,
     });
-
-    console.log('Current User Input - Type to see changes...', formValues);
 
     setFormErrors(name, value);
   };
@@ -110,15 +106,12 @@ const Signup = () => {
     });
     setFormValues(initialFormValues);
     axios
-      .post('https://vr-fund.herokuapp.com/account/signup', newUser)
+      .post("https://vr-fund.herokuapp.com/account/signup", newUser)
       .then((res) => {
-        console.log('data: ', res.data);
         setFormValues(initialFormValues);
-        push('/Login');
+        push("/Login");
       })
       .catch((err) => {
-        console.log(err);
-        console.log(newUser);
         setFormValues(initialFormValues);
       });
   };
@@ -130,25 +123,25 @@ const Signup = () => {
       <form
         onSubmit={handleSubmit}
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          boxShadow: '5px 10px #363131',
-          margin: '2%',
-          backgroundColor: 'white',
+          display: "flex",
+          flexDirection: "column",
+          boxShadow: "5px 10px #363131",
+          margin: "2%",
+          backgroundColor: "white",
         }}
       >
         <h1
           style={{
-            color: 'black',
-            width: '50%',
-            margin: 'auto',
-            fontSize: '1.8rem',
-            textAlign: 'center',
+            color: "black",
+            width: "50%",
+            margin: "auto",
+            fontSize: "1.8rem",
+            textAlign: "center",
           }}
         >
           Create a SIXR Account
         </h1>
-        <div style={{ color: 'red' }} className='error-message'>
+        <div style={{ color: "red" }} className="error-message">
           <div>{errors.first_name}</div>
           <div>{errors.last_name}</div>
           <div>{errors.email}</div>
@@ -157,16 +150,16 @@ const Signup = () => {
         </div>
         <section
           style={{
-            color: 'black',
-            width: '50%',
-            margin: 'auto',
-            textAlign: 'center',
-            fontSize: '1.3rem',
+            color: "black",
+            width: "50%",
+            margin: "auto",
+            textAlign: "center",
+            fontSize: "1.3rem",
           }}
         >
           <p
             style={{
-              fontSize: '1.3rem',
+              fontSize: "1.3rem",
             }}
           >
             Select your role:
@@ -175,24 +168,24 @@ const Signup = () => {
           {/*Radio Button 1: Fundraiser*/}
           <input
             onChange={roleChange}
-            className='role'
-            type='radio'
-            id='fundraiser'
-            name='role'
-            value='1'
+            className="role"
+            type="radio"
+            id="fundraiser"
+            name="role"
+            value="1"
           />
-          <label htmlFor='fundraiser'>Fundraiser</label>
+          <label htmlFor="fundraiser">Fundraiser</label>
 
           {/*Radio Button 2: Funder*/}
           <input
             onChange={roleChange}
-            className='role'
-            type='radio'
-            id='funder'
-            name='role'
-            value='2'
+            className="role"
+            type="radio"
+            id="funder"
+            name="role"
+            value="2"
           />
-          <label htmlFor='funder'>Funder</label>
+          <label htmlFor="funder">Funder</label>
         </section>
 
         {/*Text Input Forms Based on API EndPoints: First Name, Last Name, Email, Password*/}
@@ -200,12 +193,12 @@ const Signup = () => {
         {/*Container for Name Label & First and Last Name Fields*/}
         <div
           style={{
-            display: 'flex',
-            width: '70%',
-            margin: '2% auto',
-            justifyContent: 'space-between',
-            color: 'black',
-            fontSize: '1.4rem',
+            display: "flex",
+            width: "70%",
+            margin: "2% auto",
+            justifyContent: "space-between",
+            color: "black",
+            fontSize: "1.4rem",
           }}
         >
           <label>Name</label>
@@ -213,22 +206,22 @@ const Signup = () => {
           {/*Container for First and Last Name Fields*/}
           <div
             style={{
-              display: 'flex',
-              width: '80%',
-              justifyContent: 'space-between',
+              display: "flex",
+              width: "80%",
+              justifyContent: "space-between",
             }}
           >
             {/*First Name Field*/}
             <input
               style={{
-                height: '30px',
-                width: '45%',
-                fontSize: '1rem',
+                height: "30px",
+                width: "45%",
+                fontSize: "1rem",
               }}
-              id='first_name'
-              name='first_name'
-              type='text'
-              placeholder='First Name'
+              id="first_name"
+              name="first_name"
+              type="text"
+              placeholder="First Name"
               value={formValues.first_name}
               onChange={handleChange}
             ></input>
@@ -236,14 +229,14 @@ const Signup = () => {
             {/*Last Name Field*/}
             <input
               style={{
-                height: '30px',
-                width: '45%',
-                fontSize: '1rem',
+                height: "30px",
+                width: "45%",
+                fontSize: "1rem",
               }}
-              name='last_name'
-              id='last_name'
-              type='text'
-              placeholder='Last Name'
+              name="last_name"
+              id="last_name"
+              type="text"
+              placeholder="Last Name"
               value={formValues.last_name}
               onChange={handleChange}
             ></input>
@@ -253,31 +246,31 @@ const Signup = () => {
         {/*Container for Email Address Label & Field*/}
         <div
           style={{
-            height: '25px',
-            display: 'flex',
-            width: '70%',
-            margin: '2% auto',
-            justifyContent: 'space-between',
+            height: "25px",
+            display: "flex",
+            width: "70%",
+            margin: "2% auto",
+            justifyContent: "space-between",
           }}
         >
           {/*Email Address Label & Field*/}
           <label
             style={{
-              color: 'black',
-              fontSize: '1.3rem',
+              color: "black",
+              fontSize: "1.3rem",
             }}
-            htmlFor='email'
+            htmlFor="email"
           >
             Email Address
           </label>
           <input
             style={{
-              height: '30px',
-              width: '79%',
+              height: "30px",
+              width: "79%",
             }}
-            name='email'
-            id='email'
-            type='email'
+            name="email"
+            id="email"
+            type="email"
             value={formValues.email}
             onChange={handleChange}
           ></input>
@@ -286,40 +279,40 @@ const Signup = () => {
         {/*Container for Password Label & Field*/}
         <div
           style={{
-            height: '25px',
-            display: 'flex',
-            width: '70%',
-            margin: ' 2% auto',
-            justifyContent: 'space-between',
+            height: "25px",
+            display: "flex",
+            width: "70%",
+            margin: " 2% auto",
+            justifyContent: "space-between",
           }}
         >
           {/*Password Label & Field*/}
           <label
             style={{
-              color: 'black',
-              fontSize: '1.3rem',
+              color: "black",
+              fontSize: "1.3rem",
             }}
-            htmlFor='password'
+            htmlFor="password"
           >
             Password*
           </label>
           <input
             style={{
-              height: '30px',
-              width: '79%',
+              height: "30px",
+              width: "79%",
             }}
-            name='password'
-            id='password'
-            type='password'
+            name="password"
+            id="password"
+            type="password"
             value={formValues.password}
             onChange={handleChange}
           ></input>
         </div>
-        <p style={{ color: 'black', textAlign: 'center' }}>
+        <p style={{ color: "black", textAlign: "center" }}>
           *Password must be at least 8 characters
         </p>
         {/*Create Account Button - On submit will send user data to API*/}
-        <button disabled={disabled} style={{ width: '20%', margin: '2% auto' }}>
+        <button disabled={disabled} style={{ width: "20%", margin: "2% auto" }}>
           Create Account
         </button>
       </form>

@@ -8,17 +8,14 @@ const UserProject = ({ project }) => {
   const [showDelete, setShowDelete] = useState(false);
 
   const handleEdit = (e) => {
-    console.log("click!");
     setShowForm(!showForm);
   };
 
   const handleShowDelete = (e) => {
-    console.log("click");
     setShowDelete(!showDelete);
   };
 
   const handleDelete = (e) => {
-    console.log("click!");
     setShowDelete(!showDelete);
   };
 

@@ -5,7 +5,6 @@ import { fetchUserProjects } from "../actions/index";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 const EditProjectForm = ({ project, ...props }) => {
-  console.log(project.project_id);
   const [targetProject, setTargetProject] = useState(project);
 
   const handleChanges = (e) => {
@@ -31,12 +30,9 @@ const EditProjectForm = ({ project, ...props }) => {
     axiosWithAuth()
       .put(`projects/${project.project_id}`, updatedProject)
       .then((res) => {
-        console.log("success, res: ", res);
         props.fetchUserProjects(window.localStorage.getItem("id"));
       })
-      .catch((err) => {
-        console.log("err");
-      });
+      .catch((err) => {});
   };
 
   return (
