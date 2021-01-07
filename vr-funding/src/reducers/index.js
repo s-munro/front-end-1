@@ -3,6 +3,7 @@ import {
   FETCHING_PROJECTS_SUCCESS,
   FETCHING_PROJECTS_FAIL,
   SET_ROLE,
+  SET_EDITING,
 } from "../actions";
 
 const initialState = {
@@ -10,6 +11,17 @@ const initialState = {
   errorText: "",
   projects: [],
   role: "",
+  editedProject: {
+    amount_raised: "",
+    funding_amount: "",
+    mission_statement: "",
+    owner_id: "",
+    project_description: "",
+    project_id: "",
+    project_timeline: "",
+    project_title: "",
+    project_type: "",
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,6 +34,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, isLoading: false, errorText: action.payload };
     case SET_ROLE:
       return { ...state, role: action.payload };
+    case SET_EDITING:
+      return { ...state, editedProject: action.payload };
     default:
       return state;
   }
