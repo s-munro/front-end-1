@@ -16,8 +16,6 @@ const TitleStyled = styled.div`
 const LableAStyled = styled.div`
   padding:10px;
   color: ${(pr) => pr.theme.secondaryColor};
-  font-size: "10rem";
-  font-weight: bold;
   display: flex;
   flex-direction: row;
   height: "25px";
