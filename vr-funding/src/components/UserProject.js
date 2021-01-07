@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import "../App.css";
+
+import axiosWithAuth from "../utils/axiosWithAuth";
+import { fetchUserProjects } from "../actions/index";
 
 import EditProjectForm from "./EditProjectForm";
 
-const UserProject = ({ project }) => {
+const UserProject = ({ project, ...props }) => {
   const [showForm, setShowForm] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
 
@@ -17,6 +21,11 @@ const UserProject = ({ project }) => {
 
   const handleDelete = (e) => {
     setShowDelete(!showDelete);
+    axiosWithAuth()
+      .delete(`projects/${project.project_id}`)
+      .then((res) => {
+        props.fetchUserProjects(window.localStorage.getItem("id"));
+      });
   };
 
   return (
@@ -50,4 +59,10 @@ const UserProject = ({ project }) => {
   );
 };
 
-export default UserProject;
+const mapStateToProps = (state) => {
+  return {
+    userProjects: state.userProjects,
+  };
+};
+
+export default connect(mapStateToProps, { fetchUserProjects })(UserProject);
