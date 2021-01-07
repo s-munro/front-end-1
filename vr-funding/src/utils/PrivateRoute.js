@@ -1,14 +1,21 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import DashboardFundraiser from "../components/Dashboard_Fundraiser";
+import DashboardFunder from "../components/Dashboard_Funder";
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ uList, ...rest }) => {
   return (
     <Route
       {...rest}
       render={(props) => {
         if (localStorage.getItem("token")) {
-          return <Component {...props} />;
+          if (localStorage.getItem("role") === "1") {
+            return <DashboardFundraiser {...props} />;
+          } else if (localStorage.getItem("role") === "2") {
+            return <DashboardFunder {...props} />;
+          }
         } else {
+          console.log("nope");
           return <Redirect to="/login" />;
         }
       }}

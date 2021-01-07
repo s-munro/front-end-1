@@ -20,16 +20,23 @@ const Login = () => {
   const loginSubmit = (evt) => {
     evt.preventDefault();
     const userCard = {
-      username: loginValues.username,
+      email: loginValues.username,
       password: loginValues.password,
     };
+    console.log("click, usercard: ", userCard);
+
+    const testUser = {
+      email: "email@gmail.com",
+      password: "12345678",
+    };
     axios
-      .post("https://vr-fund.herokuapp.com/account/login", userCard)
+      .post("https://vr-fund.herokuapp.com/account/login", testUser)
       .then((res) => {
         console.log("successful login: ", res.data);
         window.localStorage.setItem("token", res.data.token);
+        window.localStorage.setItem("role", res.data.role);
         setLoginValues(initialLoginValues);
-        push("/ProjectList");
+        push("/dashboard");
       })
       .catch((err) => {
         console.log("Login Unsuccessful: ", err);
@@ -39,7 +46,7 @@ const Login = () => {
   return (
     <div>
       <h1>Sign In</h1>
-      <form>
+      <form onSubmit={loginSubmit}>
         <div className="login-forms">
           <label htmlFor="email">Email</label>
           <input id="email" type="text"></input>
