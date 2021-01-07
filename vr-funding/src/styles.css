@@ -1,10 +1,11 @@
 body {
-    background-color: #383838;
+    background-color:#3b3535;
     color: #ffffff;
     font-family: 'Roboto', sans-serif;
   }
   .container {
-    border: 2px solid #48e02a;
+    background-color: #3b3535;
+    border: 2px solid #46e38f;
     box-shadow: 0px 1px 6px -2px #807f7f;
     border-radius: 8px;
     margin-top: 14px;
@@ -15,7 +16,7 @@ body {
 
   }
   .project-card{
-    border: 2px solid #48e02a;
+    border: 2px solid #46e38f;
     box-shadow: 0px 1px 6px -2px #807f7f;
     border-radius: 8px;
     margin-top: 14px;
