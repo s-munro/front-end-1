@@ -1,16 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { setEditing } from "../actions/index";
+import { fetchUserProjects } from "../actions/index";
 
-const EditProjectForm = (props) => {
-  const targetProject = props.editedProject;
+import axiosWithAuth from "../utils/axiosWithAuth";
+
+const EditProjectForm = ({ project, ...props }) => {
+  console.log(project.project_id);
+  const [targetProject, setTargetProject] = useState(project);
 
   const handleChanges = (e) => {
-    console.log(e);
+    return setTargetProject({
+      ...targetProject,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = (e) => {
-    console.log(e);
+    e.preventDefault();
+
+    const updatedProject = {
+      project_title: targetProject.project_title,
+      project_type: targetProject.project_type,
+      mission_statement: targetProject.mission_statement,
+      project_description: targetProject.project_description,
+      funding_amount: parseInt(targetProject.funding_amount),
+      amount_raised: parseInt(targetProject.amount_raised),
+      project_timeline: targetProject.project_timeline,
+    };
+
+    axiosWithAuth()
+      .put(`projects/${project.project_id}`, updatedProject)
+      .then((res) => {
+        console.log("success, res: ", res);
+        props.fetchUserProjects(window.localStorage.getItem("id"));
+      })
+      .catch((err) => {
+        console.log("err");
+      });
   };
 
   return (
@@ -24,7 +50,7 @@ const EditProjectForm = (props) => {
               name="project_title"
               onChange={handleChanges}
               value={targetProject.project_title}
-              placeholder="Project Title"
+              placeholder={project.project_title}
               maxLength="20"
             ></input>
           </label>
@@ -35,7 +61,7 @@ const EditProjectForm = (props) => {
               name="project_type"
               onChange={handleChanges}
               value={targetProject.project_type}
-              placeholder="Project Type"
+              placeholder={project.project_type}
               maxLength="20"
             ></input>
           </label>
@@ -46,7 +72,7 @@ const EditProjectForm = (props) => {
               name="mission_statement"
               onChange={handleChanges}
               value={targetProject.mission_statement}
-              placeholder="Mission Statement"
+              placeholder={project.mission_statement}
               maxLength="100"
             ></input>
           </label>
@@ -57,7 +83,7 @@ const EditProjectForm = (props) => {
               name="project_description"
               onChange={handleChanges}
               value={targetProject.project_description}
-              placeholder="Project Description"
+              placeholder={project.project_description}
               maxLength="100"
             ></input>
           </label>
@@ -68,7 +94,7 @@ const EditProjectForm = (props) => {
               name="funding_amount"
               onChange={handleChanges}
               value={targetProject.funding_amount}
-              placeholder="Funding Amount"
+              placeholder={project.funding_amount}
               maxLength="20"
             ></input>
           </label>
@@ -79,7 +105,7 @@ const EditProjectForm = (props) => {
               name="amount_raised"
               onChange={handleChanges}
               value={targetProject.amount_raised}
-              placeholder="Amount Raised"
+              placeholder={project.amount_raised}
               maxLength="20"
             ></input>
           </label>
@@ -90,7 +116,7 @@ const EditProjectForm = (props) => {
               name="project_timeline"
               onChange={handleChanges}
               value={targetProject.project_timeline}
-              placeholder="ProjectTimeline"
+              placeholder={project.project_timeline}
               maxLength="20"
             ></input>
           </label>
@@ -121,4 +147,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { setEditing })(EditProjectForm);
+export default connect(mapStateToProps, { fetchUserProjects })(EditProjectForm);
