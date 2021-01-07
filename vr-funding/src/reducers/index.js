@@ -8,6 +8,7 @@ const initialState = {
   isLoading: false,
   errorText: "",
   projects: [],
+  role: null,
 };
 
 const reducer = (state = initialState, action) => {

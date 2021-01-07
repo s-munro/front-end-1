@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
+import { connect } from "react-redux";
+import { fetchProjects } from "../actions/index";
+
 const initialFormValues = {
   project_title: "",
   project_type: "",
@@ -11,8 +14,10 @@ const initialFormValues = {
   project_timeline: "",
 };
 
-export default function CreateProjectForm(props) {
+const CreateProjectForm = (props) => {
   const [values, setValues] = useState(initialFormValues);
+
+  console.log("create page");
 
   const onChange = (evt) => {
     evt.persist();
@@ -21,12 +26,26 @@ export default function CreateProjectForm(props) {
   };
 
   const onSubmit = (evt) => {
+    console.log("values: ", values);
     evt.preventDefault();
+
+    const newProject = {
+      project_title: values.project_title,
+      project_type: values.project_type,
+      mission_statement: values.mission_statement,
+      project_description: values.mission_statement,
+      funding_amount: parseInt(values.funding_amount),
+      amount_raised: parseInt(values.amount_raised),
+      project_timeline: values.project_timeline,
+    };
+    console.log(newProject);
+
     axiosWithAuth()
-      .post("projects", values)
+      .post("projects", newProject)
       .then((res) => {
         console.log("res: ", res);
         setValues(initialFormValues);
+        props.fetchProjects();
       })
       .catch((err) => {
         console.log("err: ", err);
@@ -116,8 +135,16 @@ export default function CreateProjectForm(props) {
         </label>
       </div>
       <div className="submit">
-        <button>submit</button>
+        <button>Submit</button>
       </div>
     </form>
   );
-}
+};
+const mapStateToProps = (state) => {
+  return {
+    projects: state.projects,
+    errorText: state.errorText,
+    isLoading: state.isLoading,
+  };
+};
+export default connect(mapStateToProps, { fetchProjects })(CreateProjectForm);

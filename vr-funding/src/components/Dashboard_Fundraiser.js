@@ -18,10 +18,7 @@ export default function DashboardFundraiser(props) {
         <div class="container">
           <h2>email here{User.email}</h2>
           <h2>role here{User.role}</h2>
-          <div
-            class="container"
-            onClick={() => history.push(`/components/CreateProject`)}
-          >
+          <div class="container" onClick={() => history.push("/createproject")}>
             Create Project
           </div>
         </div>
