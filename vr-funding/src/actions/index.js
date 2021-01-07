@@ -6,6 +6,10 @@ export const FETCHING_PROJECTS_FAIL = "FETCHING_PROJECTS_FAIL";
 
 export const SET_ROLE = "SET_ROLE";
 
+export const FETCH_USER_PROJECTS_START = "FETCH_USER_PROJECTS_START";
+export const FETCH_USER_PROJECTS_SUCCESS = "FETCH_USER_PROJECTS_SUCCESS";
+export const FETCH_USER_PROJECTS_FAIL = "FETCH_USER_PROJECTS_FAIL";
+
 export const SET_EDITING = "SET_EDITING";
 
 export const fetchProjects = () => (dispatch) => {
@@ -18,7 +22,22 @@ export const fetchProjects = () => (dispatch) => {
     })
     .catch((err) => {
       console.log("err: ", err);
-      dispatch({ type: FETCHING_PROJECTS_FAIL, payload: err.response });
+      dispatch({ type: FETCHING_PROJECTS_FAIL, payload: err.message });
+    });
+};
+
+export const fetchUserProjects = (id) => (dispatch) => {
+  dispatch({ type: FETCH_USER_PROJECTS_START });
+
+  axiosWithAuth()
+    .get(`user/${id}`)
+    .then((res) => {
+      console.log("res user fetch: ", res);
+      dispatch({ FETCH_USER_PROJECTS_SUCCESS, payload: res.data });
+    })
+    .catch((err) => {
+      console.log("err: ", err);
+      dispatch({ type: FETCH_USER_PROJECTS_FAIL, payload: err.message });
     });
 };
 
