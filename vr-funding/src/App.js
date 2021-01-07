@@ -7,6 +7,7 @@ import dummyProData from "./dummyProjectData";
 import PrivateRoute from "./utils/PrivateRoute";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
+import CreateProjectForm from "./components/CreateProjectForm";
 
 import "./App.css";
 
@@ -60,7 +61,13 @@ function App() {
             />
           )}
         />
+
         <PrivateRoute exact path="/" uList={savedUserInfo} />
+        <PrivateRoute
+          exact
+          path="/createproject"
+          component={CreateProjectForm}
+        />
       </Switch>
     </Router>
   );

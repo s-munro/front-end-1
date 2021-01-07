@@ -40,6 +40,7 @@ const mapStateToProps = (state) => {
     isLoading: state.isLoading,
     errorText: state.errorText,
     projects: state.projects,
+    role: state.role,
   };
 };
 export default connect(mapStateToProps, { fetchProjects })(ProjectList);
