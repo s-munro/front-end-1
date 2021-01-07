@@ -271,7 +271,7 @@ const Signup = () => {
             }}
             htmlFor='email'
           >
-            Email Address
+            Email
           </label>
           <input
             style={{
