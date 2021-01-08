@@ -316,7 +316,11 @@ const Signup = () => {
           *Password must be at least 8 characters
         </p>
         {/*Create Account Button - On submit will send user data to API*/}
-        <button disabled={disabled} style={{ width: "20%", margin: "2% auto" }}>
+        <button disabled={disabled}  style={{width: "20%",margin: "2% auto", 
+                fontSize: "1rem",
+                color: "#46e38f",
+                backgroundColor: "#615e5e",
+              }}>
           Create Account
         </button>
       </form>
