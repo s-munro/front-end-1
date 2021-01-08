@@ -10,23 +10,30 @@ const ProjListStyled = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-content: space-between;
-
+  margin: 10px;
 `;
 
-const ProjStyledA = styled.div` 
+const ProjStyled = styled.div` 
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-content: space-between;
-  color: ${(pr) => pr.theme.secondaryColor};
-  font-size: "2rem";
-  font-weight: normal;
+  border: 2px solid #46e38f;
+  box-shadow: 0px 1px 6px -2px #807f7f;
+  border-radius: 8px;
+  margin-top:10px;
 `;
 
-const ProjStyledB = styled.div` 
+const ProjStyledSubA = styled.div` 
   color: ${(pr) => pr.theme.secondaryColor};
   font-size: "1.5rem";
   font-weight: normal;
+`;
+
+const ProjStyledSubB = styled.div` 
+  color: ${(pr) => pr.theme.secondaryColor};
+  font-size: "3rem";
+  font-weight: bold;
 `;
 
 const ProjectList = (props) => {
@@ -41,43 +48,40 @@ const ProjectList = (props) => {
   return (
 
     <ProjListStyled>
-      <div className="project-list">
         {projects.map((project) => (
-          <div className="project-card" key={project.id}>
-            {/* <Link to={`${url}/${project.id}`}> */}
-            <div className="project-card">
-              <p>{project.project_title}</p>
-            </div>
-            {/* </Link> */}
+          <ProjStyled>
+    
+            <ProjStyledSubA> 
+              <p>{project.project_title}</p>        
+            </ProjStyledSubA>
+         
+            <ProjStyledSubA>         
+              <p>{project.project_description}</p>         
+            </ProjStyledSubA>
 
-            <div className="project-card">
-              <p>{project.project_description}</p>
-            </div>
-
-            <div className="project-card">
+            <ProjStyledSubA>       
               <p>
-                Mission Statement: <br />
+              <ProjStyledSubB>Mission Statement:</ProjStyledSubB> <br />
                 {project.mission_statement}
               </p>
-            </div>
+            </ProjStyledSubA>
 
-            <div className="project-card">
-              <p>Timeline: {project.project_timeline}</p>
-            </div>
+            <ProjStyledSubA>           
+              <p><ProjStyledSubB>Timeline:</ProjStyledSubB> {project.project_timeline}</p>         
+            </ProjStyledSubA>
 
-            <div className="project-card">
+            <ProjStyledSubA>           
               <p>
                 ${project.amount_raised}/${project.funding_amount}
-              </p>
-            </div>
+              </p>          
+            </ProjStyledSubA>
             {props.role === 2 ? (
-              <div className="project-card">
-                <p>Click Here to Fund!</p>
-              </div>
+              <ProjStyledSubB>             
+                <p>Click Here to Fund!</p>             
+              </ProjStyledSubB>
             ) : null}
-          </div>
+          </ProjStyled>
         ))}
-    </div>
   </ProjListStyled>
   );
 };
