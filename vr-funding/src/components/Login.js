@@ -148,7 +148,7 @@ const Login = (props) => {
           <button
             // disabled={disabled}
             style={{
-              fontSize: "1.7rem",
+              fontSize: "2.4rem",
               color: "#46e38f",
               backgroundColor: "#615e5e",
             }}
@@ -160,7 +160,7 @@ const Login = (props) => {
           <BtnSpacerStyled>
             <button
               style={{
-                fontSize: "1.2rem",
+                fontSize: "1rem",
                 color: "#46e38f",
                 backgroundColor: "#615e5e",
               }}
@@ -170,7 +170,7 @@ const Login = (props) => {
             <div style={{ width: "7%" }}></div>
             <button
               style={{
-                fontSize: "1.2rem",
+                fontSize: "1rem",
                 color: "#46e38f",
                 backgroundColor: "#615e5e",
               }}

@@ -51,9 +51,9 @@ const ProjectList = (props) => {
         {projects.map((project) => (
           <ProjStyled>
     
-            <ProjStyledSubA> 
+            <ProjStyledSubB> 
               <p>{project.project_title}</p>        
-            </ProjStyledSubA>
+            </ProjStyledSubB>
          
             <ProjStyledSubA>         
               <p>{project.project_description}</p>         
