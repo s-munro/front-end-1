@@ -129,6 +129,17 @@ const mapStateToProps = (state) => {
   return {
     projects: state.projects,
     role: "",
+    editedProject: {
+      amount_raised: state.editedProject.amount_raised,
+      funding_amount: state.editedProject.funding_amount,
+      mission_statement: state.editedProject.mission_statement,
+      owner_id: state.editedProject.owner_id,
+      project_description: state.editedProject.project_description,
+      project_id: state.editedProject.project_id,
+      project_timeline: state.editedProject.project_timeline,
+      project_title: state.editedProject.project_title,
+      project_type: state.editedProject.project_type,
+    },
   };
 };
 
