@@ -18,8 +18,6 @@ const TitleStyled = styled.div`
 const LableAStyled = styled.div`
   padding: 10px;
   color: ${(pr) => pr.theme.secondaryColor};
-  font-size: "10rem";
-  font-weight: bold;
   display: flex;
   flex-direction: row;
   height: "25px";
@@ -149,7 +147,11 @@ const Login = (props) => {
           <br></br>
           <button
             // disabled={disabled}
-            style={{ width: "60%", margin: "2% auto" }}
+            style={{
+              fontSize: "2.4rem",
+              color: "#46e38f",
+              backgroundColor: "#615e5e",
+            }}
           >
             Sign in to SIXR
           </button>
@@ -158,7 +160,7 @@ const Login = (props) => {
           <BtnSpacerStyled>
             <button
               style={{
-                fontSize: "1.7rem",
+                fontSize: "1rem",
                 color: "#46e38f",
                 backgroundColor: "#615e5e",
               }}
@@ -168,7 +170,7 @@ const Login = (props) => {
             <div style={{ width: "7%" }}></div>
             <button
               style={{
-                fontSize: "1.7rem",
+                fontSize: "1rem",
                 color: "#46e38f",
                 backgroundColor: "#615e5e",
               }}
