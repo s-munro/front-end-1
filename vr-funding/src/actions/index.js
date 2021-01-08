@@ -29,6 +29,7 @@ export const fetchUserProjects = (id) => (dispatch) => {
   axiosWithAuth()
     .get(`user/${id}`)
     .then((res) => {
+      console.log(res);
       dispatch({
         type: FETCH_USER_PROJECTS_SUCCESS,
         payload: res.data.projects,
