@@ -91,7 +91,7 @@ const Login = (props) => {
         props.setRole(res.data.role);
         props.setId(res.data.id);
         setLoginValues(initialLoginValues);
-        push("/dashboard");
+        push("/");
       })
       .catch((err) => {
         setLoginValues(initialLoginValues);
