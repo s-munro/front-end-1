@@ -68,6 +68,13 @@
   height: 80vh;
 }
 
+.signup-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5%;
+}
+
 #components-form-demo-normal-login .login-form {
   max-width: 300px;
 }

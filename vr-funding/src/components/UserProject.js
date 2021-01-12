@@ -11,7 +11,6 @@ import { Button, Card, Descriptions, Popconfirm, message } from "antd";
 
 const UserProject = ({ project, ...props }) => {
   const [showForm, setShowForm] = useState(false);
-  const [showDelete, setShowDelete] = useState(false);
 
   const handleEdit = (e) => {
     setShowForm(!showForm);

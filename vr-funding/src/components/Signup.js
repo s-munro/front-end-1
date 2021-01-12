@@ -1,326 +1,213 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
-import * as yup from "yup";
 import { useHistory } from "react-router-dom";
 
-import { Button } from "antd";
+import { Form, Input, Card, Checkbox, Radio, Button } from "antd";
 
-const schema = yup.object().shape({
-  first_name: yup
-    .string()
-    .required("First name field is required.")
-    .min(2, "Name must be at least two characters."),
-  last_name: yup
-    .string()
-    .required("Last name field is required.")
-    .min(2, "Name must be at least two characters."),
-  email: yup.string().required("Email field is required."),
-  password: yup
-    .string()
-    .required("Password field is required.")
-    .min(8, "Password must be at least 8 characters."),
-  role: yup.number().oneOf([1, 2], "Please select a role."),
-});
-
-// setting initial form values that will change dynamically every time the user changes the inputs
-const initialFormValues = {
-  first_name: "",
-  last_name: "",
-  email: "",
-  password: "",
-  role: "",
+const formItemLayout = {
+  labelCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 8,
+    },
+  },
+  wrapperCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 16,
+    },
+  },
 };
 
-// organizing data set to be POSTED to API - dynamic values will be added here once form is submitted
-const initialUsers = {
-  users: [
-    {
-      first_name: "",
-      last_name: "",
-      email: "",
-      password: "",
-      role: "",
-      id: Math.round(Math.random() * 1000),
+const tailFormItemLayout = {
+  wrapperCol: {
+    xs: {
+      span: 24,
+      offset: 0,
     },
-  ],
+    sm: {
+      span: 16,
+      offset: 8,
+    },
+  },
 };
 
 const Signup = () => {
   const { push } = useHistory();
+  const [form] = Form.useForm();
 
-  const [userList, setUserList] = useState(initialUsers);
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const [disabled, setDisabled] = useState(true); //state that controls whether button is disabled
-  const [errors, setErrors] = useState({
-    //state that holds form verification error messages
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
-    role: "",
-  });
-  /*Disabling button unless form is validated */
-  useEffect(() => {
-    schema.isValid(formValues).then((valid) => setDisabled(!valid));
-  }, [formValues]);
-
-  const setFormErrors = (name, value) => {
-    yup
-      .reach(schema, name)
-      .validate(value)
-      .then(() => setErrors({ ...errors, [name]: "" }))
-      .catch((err) => setErrors({ ...errors, [name]: err.errors[0] }));
-  };
-  const roleChange = (e) => {
-    var a = parseInt(e.target.value);
-    setFormValues({
-      ...formValues,
-      role: a,
-    });
-  };
   const handleChange = (e) => {
-    const { value, name } = e.target;
-    e.stopPropagation();
-
-    setFormValues({
-      ...formValues,
-      [e.target.name]: e.target.value,
-    });
-
-    setFormErrors(name, value);
+    console.log(e);
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    console.log(e);
 
     const newUser = {
-      first_name: formValues.first_name.trim(),
-      last_name: formValues.last_name.trim(),
-      email: formValues.email.trim(),
-      password: formValues.password.trim(),
-      role: formValues.role,
-      id: Math.floor(Math.random() * 100),
+      first_name: e.first_name.trim(),
+      last_name: e.last_name.trim(),
+      email: e.email.trim(),
+      password: e.password.trim(),
+      role: e.role,
     };
 
-    setUserList({
-      ...userList,
-      users: [...userList.users, newUser],
-    });
-
-    console.log(newUser);
-
-    setFormValues(initialFormValues);
     axios
       .post("https://vr-fund.herokuapp.com/account/signup", newUser)
       .then((res) => {
-        setFormValues(initialFormValues);
         push("/Login");
       })
       .catch((err) => {
-        setFormValues(initialFormValues);
+        console.log(err);
       });
+
+    form.resetFields();
   };
 
   return (
-    <div>
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          boxShadow: "5px 10px #363131",
-          margin: "2%",
-        }}
-      >
-        <h1
-          style={{
-            color: "#ebeae4",
-            fontSize: "2.5rem",
-            fontWeight: "bold",
-            width: "50%",
-            margin: "2% auto",
-            textAlign: "center",
+    <div className="signup-form-container">
+      <Card title="Sign Up!" style={{ width: 400 }}>
+        <Form
+          {...formItemLayout}
+          form={form}
+          name="signup"
+          onFinish={handleSubmit}
+          initialValues={{
+            first_name: "",
+            last_name: "",
+            email: "",
+            password: "",
+            confirm: "",
+            role: "1",
           }}
+          scrollToFirstError
         >
-          Create a SIXR Account
-        </h1>
-        <div style={{ color: "red" }} className="error-message">
-          <div>{errors.first_name}</div>
-          <div>{errors.last_name}</div>
-          <div>{errors.email}</div>
-          <div>{errors.password}</div>
-          <div>{errors.role}</div>
-        </div>
-        <section
-          style={{
-            color: "#ebeae4",
-            width: "50%",
-            margin: "auto",
-            textAlign: "center",
-            fontSize: "1.8rem",
-          }}
-        >
-          <p
-            style={{
-              fontSize: "1.8rem",
-              fontWeight: "bold",
-            }}
+          <Form.Item
+            name="first_name"
+            label="First Name"
+            rules={[
+              {
+                required: true,
+                message: "Please enter first name",
+              },
+            ]}
           >
-            Select your role:
-          </p>
+            <Input />
+          </Form.Item>
 
-          {/*Radio Button 1: Fundraiser*/}
-          <input
-            onChange={roleChange}
-            className="role"
-            type="radio"
-            id="fundraiser"
-            name="role"
-            value="1"
-          />
-          <label htmlFor="fundraiser">Fundraiser</label>
-
-          {/*Radio Button 2: Funder*/}
-          <input
-            onChange={roleChange}
-            className="role"
-            type="radio"
-            id="funder"
-            name="role"
-            value="2"
-          />
-          <label htmlFor="funder">Funder</label>
-        </section>
-
-        {/*Text Input Forms Based on API EndPoints: First Name, Last Name, Email, Password*/}
-
-        {/*Container for Name Label & First and Last Name Fields*/}
-        <div
-          style={{
-            display: "flex",
-            width: "70%",
-            margin: "2% auto",
-            justifyContent: "space-between",
-            color: "#ebeae4",
-            fontSize: "1.8rem",
-            fontWeight: "bold",
-          }}
-        >
-          <label>Name</label>
-
-          {/*Container for First and Last Name Fields*/}
-          <div
-            style={{
-              display: "flex",
-              width: "80%",
-              justifyContent: "space-between",
-            }}
+          <Form.Item
+            name="last_name"
+            label="Last Name"
+            rules={[
+              {
+                message: "Please enter last name",
+              },
+              {
+                required: true,
+                message: "Please enter last name",
+              },
+            ]}
           >
-            {/*First Name Field*/}
-            <input
-              style={{
-                height: "30px",
-                width: "45%",
-                fontSize: "1rem",
-              }}
-              id="first_name"
-              name="first_name"
-              type="text"
-              placeholder="First Name"
-              value={formValues.first_name}
-              onChange={handleChange}
-            ></input>
+            <Input />
+          </Form.Item>
 
-            {/*Last Name Field*/}
-            <input
-              style={{
-                height: "30px",
-                width: "45%",
-                fontSize: "1rem",
-              }}
-              name="last_name"
-              id="last_name"
-              type="text"
-              placeholder="Last Name"
-              value={formValues.last_name}
-              onChange={handleChange}
-            ></input>
-          </div>
-        </div>
-
-        {/*Container for Email Address Label & Field*/}
-        <div
-          style={{
-            height: "25px",
-            display: "flex",
-            width: "70%",
-            margin: "2% auto",
-            justifyContent: "space-between",
-          }}
-        >
-          {/*Email Address Label & Field*/}
-          <label
-            style={{
-              color: "#ebeae4",
-              fontSize: "1.8rem",
-              fontWeight: "bold",
-            }}
-            htmlFor="email"
-          >
-            Email
-          </label>
-          <input
-            style={{
-              height: "30px",
-              width: "79%",
-            }}
+          <Form.Item
             name="email"
-            id="email"
-            type="email"
-            value={formValues.email}
-            onChange={handleChange}
-          ></input>
-        </div>
-
-        {/*Container for Password Label & Field*/}
-        <div
-          style={{
-            height: "25px",
-            display: "flex",
-            width: "70%",
-            margin: " 2% auto",
-            justifyContent: "space-between",
-          }}
-        >
-          {/*Password Label & Field*/}
-          <label
-            style={{
-              color: "#ebeae4",
-              fontWeight: "bold",
-              fontSize: "1.8rem",
-            }}
-            htmlFor="password"
+            label="E-mail"
+            rules={[
+              {
+                type: "email",
+                message: "Please enter a valid E-mail",
+              },
+              {
+                required: true,
+                message: "Please enter your E-mail",
+              },
+            ]}
           >
-            Password*
-          </label>
-          <input
-            style={{
-              height: "30px",
-              width: "79%",
-            }}
+            <Input />
+          </Form.Item>
+          <Form.Item
             name="password"
-            id="password"
-            type="password"
-            value={formValues.password}
-            onChange={handleChange}
-          ></input>
-        </div>
-        <p style={{ color: "#ebeae4", textAlign: "center" }}>
-          *Password must be at least 8 characters
-        </p>
-        {/*Create Account Button - On submit will send user data to API*/}
-        <Button disabled={disabled}>Create Account</Button>
-      </form>
+            label="Password"
+            rules={[
+              {
+                required: true,
+                message: "Please input your password!",
+              },
+            ]}
+            hasFeedback
+          >
+            <Input.Password />
+          </Form.Item>
+
+          <Form.Item
+            name="confirm"
+            label="Confirm Password"
+            dependencies={["password"]}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: "Please confirm your password!",
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+
+                  return Promise.reject("Passwords do not match");
+                },
+              }),
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+
+          <Form.Item
+            name="role"
+            rules={[
+              {
+                required: true,
+                message: "Please select a role",
+              },
+            ]}
+            {...tailFormItemLayout}
+          >
+            <Radio.Group onChange={handleChange} value={""}>
+              <Radio value={1}>Fundraiser</Radio>
+              <Radio value={2}>Funder</Radio>
+            </Radio.Group>
+          </Form.Item>
+
+          <Form.Item
+            name="agreement"
+            valuePropName="checked"
+            rules={[
+              {
+                validator: (_, value) =>
+                  value
+                    ? Promise.resolve()
+                    : Promise.reject("Please accept agreement"),
+              },
+            ]}
+            {...tailFormItemLayout}
+          >
+            <Checkbox>
+              I have read the <a href="/">agreement</a>
+            </Checkbox>
+          </Form.Item>
+          <Form.Item {...tailFormItemLayout}>
+            <Button type="primary" htmlType="submit">
+              Sign Up
+            </Button>
+          </Form.Item>
+        </Form>
+      </Card>
     </div>
   );
 };

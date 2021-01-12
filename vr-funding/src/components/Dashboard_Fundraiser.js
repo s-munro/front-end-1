@@ -12,6 +12,7 @@ import "../App.css";
 const DashboardFundraiser = (props) => {
   // const { uList } = props;
   const history = useHistory();
+  const email = localStorage.getItem("email");
 
   const [projectsVisible, setProjectsVisible] = useState(false);
 
@@ -30,7 +31,7 @@ const DashboardFundraiser = (props) => {
         <div className="helloCard-container">
           <div className="helloCard-welcome">
             <Avatar size={64} icon={<UserOutlined />} />
-            <h2>Welcome, email</h2>
+            <h2>Welcome, {email}</h2>
             <h2>role: {props.role === 1 ? "Fundraiser" : "Funder"}</h2>
             <div onClick={() => history.push("/createproject")}>
               <Button>Create Project</Button>
