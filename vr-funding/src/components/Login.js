@@ -6,7 +6,11 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { setId, setRole } from "../actions/index";
 
-import { Button } from "antd";
+import { Card, Button, Form, Input, Checkbox } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { FormInstance } from "antd/lib/form";
+
+import "../App.css";
 
 const schema = yup.object().shape({
   email: yup.string().required("Email field is required."),
@@ -25,32 +29,16 @@ const initialLoginErrors = {
 const initialDisabled = true;
 
 const Login = (props) => {
+  const [form] = Form.useForm();
   const { push } = useHistory();
 
   const [loginValues, setLoginValues] = useState(initialLoginValues);
-  const [loginErrors, setLoginErrors] = useState(initialLoginErrors);
-  const [disabled, setDisabled] = useState(initialDisabled);
 
-  useEffect(() => {
-    schema.isValid(loginValues).then((valid) => setDisabled(!valid));
-  }, [loginValues]);
-
-  const handleChange = (e) => {
-    setLoginValues({
-      ...loginValues,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const loginSubmit = (evt) => {
-    evt.preventDefault();
-    const userCard = {
-      email: loginValues.email,
-      password: loginValues.password,
-    };
+  const loginSubmit = (e) => {
+    const user = e.user;
 
     axios
-      .post("https://vr-fund.herokuapp.com/account/login", userCard)
+      .post("https://vr-fund.herokuapp.com/account/login", user)
       .then((res) => {
         window.localStorage.setItem("token", res.data.token);
         window.localStorage.setItem("role", res.data.role);
@@ -63,65 +51,56 @@ const Login = (props) => {
       .catch((err) => {
         setLoginValues(initialLoginValues);
       });
+    form.resetFields();
   };
   return (
-    <div>
-      <form onSubmit={loginSubmit}>
-        <h2>Sign In</h2>
+    <div className="login-container">
+      <Card title="Welcome!" style={{ width: 300 }}>
+        <Form
+          name="login"
+          className="login-form"
+          initialValues={{ user: "", password: "" }}
+          onFinish={loginSubmit}
+          form={form}
+        >
+          <Form.Item
+            name={["user", "email"]}
+            rules={[{ required: true, message: "Please input your email!" }]}
+          >
+            <Input
+              prefix={<UserOutlined className="site-form-item-icon" />}
+              placeholder="Username"
+            />
+          </Form.Item>
+          <Form.Item
+            name={["user", "password"]}
+            rules={[{ required: true, message: "Please input your Password!" }]}
+          >
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Item>
+          <Form.Item>
+            <Form.Item name="remember" valuePropName="checked" noStyle>
+              <Checkbox>Remember me</Checkbox>
+            </Form.Item>
+          </Form.Item>
 
-        <label
-          style={{
-            fontSize: "1.8rem",
-          }}
-          htmlFor="password"
-        >
-          Email
-        </label>
-        <input
-          style={{
-            height: "30px",
-            width: "79%",
-          }}
-          name="email"
-          id="email"
-          type="email"
-          value={loginValues.email}
-          onChange={handleChange}
-        ></input>
-        <label
-          style={{
-            fontSize: "1.8rem",
-          }}
-          htmlFor="email"
-        >
-          Password
-        </label>
-        <input
-          style={{
-            height: "30px",
-            width: "79%",
-          }}
-          name="password"
-          id="password"
-          type="password"
-          value={loginValues.password}
-          onChange={handleChange}
-        ></input>
-
-        <br></br>
-        <Button
-          // disabled={disabled}
-          style={{
-            fontSize: "2.4rem",
-            color: "#46e38f",
-            backgroundColor: "#615e5e",
-          }}
-        >
-          Sign in to SIXR
-        </Button>
-        <br></br>
-        <br></br>
-      </form>
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+            >
+              Log in
+            </Button>
+            <br />
+            Or <a href="http://localhost:3001/signup">register now!</a>
+          </Form.Item>
+        </Form>
+      </Card>
     </div>
   );
 };
