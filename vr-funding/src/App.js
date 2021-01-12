@@ -5,6 +5,7 @@ import ProjectPage from "./components/ProjectPage";
 
 import dummyProData from "./dummyProjectData";
 import PrivateRoute from "./utils/PrivateRoute";
+import PrivateRouteProjectPage from "./utils/PrivateRouteProjectPage";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import CreateProjectForm from "./components/CreateProjectForm";
@@ -52,7 +53,7 @@ function App() {
 
         <Route path="/signup" submit={submit} component={SignUp} />
 
-        <Route
+        {/* <Route
           path="/projects"
           render={(props) => (
             <ProjectPage
@@ -60,9 +61,14 @@ function App() {
               //  projects={projectList}
             />
           )}
-        />
+        /> */}
 
         <PrivateRoute exact path="/" uList={savedUserInfo} />
+        <PrivateRouteProjectPage
+          exact
+          path="/projects"
+          component={ProjectPage}
+        />
         <PrivateRoute
           exact
           path="/createproject"
