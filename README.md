@@ -6,3 +6,5 @@ To-Dos:
 
 * [] edit project styling
 * [] edit project push history or hide screen on submit
+* [] redirect projects page if not signed in
+* [] begin transitioning colors to the green?
