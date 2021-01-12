@@ -30,6 +30,7 @@ const mapStateToProps = (state) => {
     id: state.id,
     projects: state.projects,
     userProjects: state.userProjects,
+    role: state.role,
   };
 };
 export default connect(mapStateToProps, { fetchProjects, fetchUserProjects })(

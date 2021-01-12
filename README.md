@@ -1,3 +1,8 @@
+- CRUD Operations
+- Private Routing/authentication/authorization
+- Form validation
+- Redux w/ middleware (thunk, logger, devtools)
+
 To-Dos:
 
 - [] conditional submit message popup on login, depending on if access denied?
@@ -6,7 +11,9 @@ To-Dos:
 
 * [] edit project styling
 * [] edit project push history or hide screen on submit
-* [] redirect projects page if not signed in
+* [x] redirect projects page if not signed in
 * [] begin transitioning colors to the green?
-* [] funder and fundraiser values on signup page
-* [] modal for terms
+* [x] funder and fundraiser values on signup page
+* [x] modal for terms
+* [x] no data render on load my project length === 0
+* [x] unauth component on visit page without auth

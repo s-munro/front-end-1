@@ -10,6 +10,7 @@ import { UserOutlined } from "@ant-design/icons";
 import "../App.css";
 
 const DashboardFundraiser = (props) => {
+  console.log("role: ", props.role);
   // const { uList } = props;
   const history = useHistory();
   const email = localStorage.getItem("email");
@@ -32,7 +33,10 @@ const DashboardFundraiser = (props) => {
           <div className="helloCard-welcome">
             <Avatar size={64} icon={<UserOutlined />} />
             <h2>Welcome, {email}</h2>
-            <h2>role: {props.role === 1 ? "Fundraiser" : "Funder"}</h2>
+            <h2>
+              role: {props.role == 1 ? "Fundraiser" : null}
+              {props.role == 2 ? "Funder" : null}
+            </h2>
             <div onClick={() => history.push("/createproject")}>
               <Button>Create Project</Button>
             </div>
