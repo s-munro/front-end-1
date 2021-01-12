@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-import { Modal, Form, Input, Card, Checkbox, Radio, Button } from "antd";
+import { Modal, Form, Input, Card, Checkbox, Radio, Button, Alert } from "antd";
 
 const formItemLayout = {
   labelCol: {
@@ -39,6 +39,7 @@ const tailFormItemLayout = {
 const Signup = () => {
   const { push } = useHistory();
   const [form] = Form.useForm();
+  const [loginFailed, setLoginFailed] = useState(false);
 
   const handleChange = (e) => {
     console.log(e);
@@ -73,10 +74,12 @@ const Signup = () => {
     axios
       .post("https://vr-fund.herokuapp.com/account/signup", newUser)
       .then((res) => {
+        setLoginFailed(false);
         push("/Login");
       })
       .catch((err) => {
         console.log(err);
+        setLoginFailed(true);
       });
 
     form.resetFields();
@@ -85,6 +88,13 @@ const Signup = () => {
   return (
     <div className="signup-form-container">
       <Card title="Sign Up!" style={{ width: 400 }}>
+        {loginFailed === true ? (
+          <div>
+            <Alert message="Signup failed, try alternate email" type="error" />{" "}
+            <br />
+          </div>
+        ) : null}
+
         <Form
           {...formItemLayout}
           form={form}
