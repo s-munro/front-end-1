@@ -5,12 +5,12 @@
 
 To-Dos:
 
-- [] conditional submit message popup on login, depending on if access denied?
+- [x] conditional submit message popup on login, depending on if access denied?
 - [x] signup form
 - [x] 'weclome, EMAIL' need plug in email for welcome message
 
 * [] edit project styling
-* [] edit project push history or hide screen on submit
+* [x] edit project push history or hide screen on submit
 * [x] redirect projects page if not signed in
 * [] begin transitioning colors to the green?
 * [x] funder and fundraiser values on signup page
