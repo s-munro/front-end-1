@@ -8,3 +8,5 @@ To-Dos:
 * [] edit project push history or hide screen on submit
 * [] redirect projects page if not signed in
 * [] begin transitioning colors to the green?
+* [] funder and fundraiser values on signup page
+* [] modal for terms
