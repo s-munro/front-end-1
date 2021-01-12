@@ -1,38 +1,60 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { setRole } from "../actions/index";
+import { setRole, fetchUserProjects } from "../actions/index";
+// import UserProjectsList from "./UserProjectsList";
 
-const Dashboard_Funder = (props) => {
-  const { uList } = props;
+import { Avatar, Button } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+
+import "../App.css";
+
+const DashboardFunder = (props) => {
   const history = useHistory();
+  const email = localStorage.getItem("email");
+
+  const [projectsVisible, setProjectsVisible] = useState(false);
 
   useEffect(() => {
     props.setRole();
+    props.fetchUserProjects(window.localStorage.getItem("id"));
   }, []);
 
+  const handleClick = (e) => {
+    setProjectsVisible(!projectsVisible);
+  };
+
   return (
-    <div class="container">
-      {uList.map((User) => (
-        <div class="container">
-          <h2>Welcome, {User.email}</h2>
-          <h2>role here{props.role}</h2>
-          <div
-            class="container"
-            onClick={() => history.push(`/components/ProjectPage`)}
-          >
-            Browse Projects
+    <div>
+      <div class="dashboard-container">
+        <div className="helloCard-container">
+          <div className="helloCard-welcome">
+            <Avatar size={64} icon={<UserOutlined />} />
+            <h2>Welcome, {email}</h2>
+            <h2>
+              role: {props.role == 1 ? "Fundraiser" : null}
+              {props.role == 2 ? "Funder" : null}
+            </h2>
+            <div onClick={() => history.push("/projects")}>
+              <Button>Browse Projects</Button>
+            </div>
+            {/* <Button onClick={handleClick}>Load My Projects</Button>
+            <br />
+            <br />
+            {projectsVisible === true ? <UserProjectsList /> : null} */}
           </div>
         </div>
-      ))}
+      </div>
     </div>
   );
 };
-
 const mapStateToProps = (state) => {
   return {
+    id: state.id,
     role: state.role,
+    userProjects: state.userProjects,
   };
 };
-
-export default connect(mapStateToProps, { setRole })(Dashboard_Funder);
+export default connect(mapStateToProps, { setRole, fetchUserProjects })(
+  DashboardFunder
+);

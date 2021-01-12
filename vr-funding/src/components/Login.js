@@ -44,7 +44,11 @@ const Login = (props) => {
       <Card title="Welcome!" style={{ width: 300 }}>
         {loginFailed === true ? (
           <div>
-            <Alert message="Login Failed" type="error" /> <br />
+            <Alert
+              message="Login failed, verify correct credentials"
+              type="error"
+            />{" "}
+            <br />
           </div>
         ) : null}
 
