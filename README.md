@@ -1,11 +1,8 @@
-# front-end
+To-Dos:
 
-## How to use:
+- [] conditional submit message popup on login, depending on if access denied?
+- [x] signup form
+- [x] 'weclome, EMAIL' need plug in email for welcome message
 
-- cd into vr-funding
-- npm i
-- npm start
-
-### Links:
-
-- Marketing pages: https://marketing-pages-home.vercel.app/
+* [] edit project styling
+* [] edit project push history or hide screen on submit
