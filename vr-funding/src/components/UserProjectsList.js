@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchProjects, fetchUserProjects } from "../actions/index";
 
 import UserProject from "./UserProject";
+import NoData from "../NoData";
 
 const UserProjectsList = (props) => {
   //projects.map
@@ -19,6 +20,7 @@ const UserProjectsList = (props) => {
           </div>
         );
       })}
+      {props.userProjects.length > 0 ? null : <NoData />}
     </div>
   );
 };

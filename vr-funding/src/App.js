@@ -9,6 +9,7 @@ import PrivateRouteProjectPage from "./utils/PrivateRouteProjectPage";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import CreateProjectForm from "./components/CreateProjectForm";
+import Unauth from "./Unauth";
 
 import "./App.css";
 
@@ -52,6 +53,8 @@ function App() {
         <Route path="/login" component={Login} />
 
         <Route path="/signup" submit={submit} component={SignUp} />
+
+        <Route path="/unauthorized" component={Unauth} />
 
         {/* <Route
           path="/projects"
