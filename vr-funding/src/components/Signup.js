@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-import { Form, Input, Card, Checkbox, Radio, Button } from "antd";
+import { Modal, Form, Input, Card, Checkbox, Radio, Button } from "antd";
 
 const formItemLayout = {
   labelCol: {
@@ -42,6 +42,21 @@ const Signup = () => {
 
   const handleChange = (e) => {
     console.log(e);
+  };
+
+  const handleInfo = (e) => {
+    Modal.info({
+      title: "Terms and Agreements",
+      content: (
+        <div>
+          <p>
+            I have no terms and agreements, this is a demo. Thank you for
+            visiting the site!
+          </p>
+        </div>
+      ),
+      onOk() {},
+    });
   };
 
   const handleSubmit = (e) => {
@@ -198,7 +213,10 @@ const Signup = () => {
             {...tailFormItemLayout}
           >
             <Checkbox>
-              I have read the <a href="/">agreement</a>
+              I have read the{" "}
+              <span className="agreement-link" onClick={handleInfo}>
+                agreement
+              </span>
             </Checkbox>
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>

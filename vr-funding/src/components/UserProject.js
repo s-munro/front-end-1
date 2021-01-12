@@ -67,7 +67,11 @@ const UserProject = ({ project, ...props }) => {
         </div>
         {showForm === true ? (
           <div className="">
-            <EditProjectForm project={project} />
+            <EditProjectForm
+              project={project}
+              showForm={showForm}
+              setShowForm={setShowForm}
+            />
           </div>
         ) : null}
         {/* {showDelete === true ? (

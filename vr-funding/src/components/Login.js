@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 import { useHistory } from "react-router-dom";
@@ -6,14 +6,17 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { setId, setRole } from "../actions/index";
 
-import { Card, Button, Form, Input, Checkbox } from "antd";
+import { Card, Button, Form, Input, Checkbox, Alert } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 import "../App.css";
 
 const Login = (props) => {
   const [form] = Form.useForm();
+
   const { push } = useHistory();
+
+  const [loginFailed, setLoginFailed] = useState(false);
 
   const loginSubmit = (e) => {
     const user = e.user;
@@ -21,6 +24,7 @@ const Login = (props) => {
     axios
       .post("https://vr-fund.herokuapp.com/account/login", user)
       .then((res) => {
+        setLoginFailed(false);
         window.localStorage.setItem("email", user.email);
         window.localStorage.setItem("token", res.data.token);
         window.localStorage.setItem("role", res.data.role);
@@ -31,12 +35,19 @@ const Login = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        setLoginFailed(true);
       });
     form.resetFields();
   };
   return (
     <div className="login-container">
       <Card title="Welcome!" style={{ width: 300 }}>
+        {loginFailed === true ? (
+          <div>
+            <Alert message="Login Failed" type="error" /> <br />
+          </div>
+        ) : null}
+
         <Form
           name="login"
           className="login-form"
