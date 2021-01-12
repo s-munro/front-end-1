@@ -6,12 +6,14 @@ front-end, which was a week-long build week project (Jan 4 - 9th) assigned by La
 /
 back-end"
 
-Throughout this project, you will see basic modern styling with various features such as:
+Throughout this project, you will see modern styling and an app with various features, including (but not limited to):
 
 - CRUD Operations
 - Private Routing/authentication/authorization
 - Form validation
 - Redux w/ middleware (thunk, logger, devtools)
+
+Majority of this app is centered around the 'fundraiser' role, so if you are to test the app out, i recommend you create a 'fundraiser' account rather than a 'funder' account.  Thank you for visiting!
 
 **End Introduction**
 
@@ -29,3 +31,4 @@ To-Dos:
 * [x] modal for terms
 * [x] no data render on load my project length === 0
 * [x] unauth component on visit page without auth
+* []  add stripe api and some sort of 'fund' option for funders?
